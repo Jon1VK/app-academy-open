@@ -1,0 +1,3 @@
+require_relative "null_piece_error"
+require_relative "invalid_move_error"
+require_relative "opponent_piece_error"

@@ -20,6 +20,12 @@ class ShortenedUrl < ApplicationRecord
   belongs_to :user
   alias_method :submitter, :user
 
+  has_many :visits
+  
+  has_many :visitors,
+    through: :visits,
+    source: :user
+
   def self.create_from(attributes)
     p attributes
     self.create(**attributes, short_url: self.random_code)

@@ -10,4 +10,6 @@
 #  updated_at    :datetime         not null
 #
 class Course < ApplicationRecord
+    has_many :enrollments
+    has_many :enrolled_students, through: :enrollments, source: :student
 end

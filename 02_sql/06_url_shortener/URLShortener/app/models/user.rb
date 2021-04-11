@@ -14,4 +14,10 @@ class User < ApplicationRecord
 
     has_many :shortened_urls
     alias_method :submitted_urls, :shortened_urls
+
+    has_many :visits
+
+    has_many :visited_urls,
+        through: :visits,
+        source: :shortened_url
 end

@@ -18,4 +18,16 @@ class ShortenedUrl < ApplicationRecord
     presence: true
 
   belongs_to :user
+
+  def self.create_from(attributes)
+    p attributes
+    self.create(**attributes, short_url: self.random_code)
+  end
+
+  def self.random_code
+    loop do
+      code = SecureRandom.urlsafe_base64
+      return code if !self.exists?(short_url: code)
+    end
+  end
 end

@@ -8,5 +8,10 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
-    validates :email, presence: true, uniqueness: true
+    validates :email,
+        presence: true,
+        uniqueness: true
+
+    has_many :shortened_urls
+    alias_method :submitted_urls, :shortened_urls
 end

@@ -18,6 +18,7 @@ class ShortenedUrl < ApplicationRecord
     presence: true
 
   belongs_to :user
+  alias_method :submitter, :user
 
   def self.create_from(attributes)
     p attributes

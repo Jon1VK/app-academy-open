@@ -9,4 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Enrollment < ApplicationRecord
+    belongs_to :student, class_name: 'User'
+    belongs_to :course
 end

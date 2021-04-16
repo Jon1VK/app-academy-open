@@ -17,6 +17,8 @@ class ShortenedUrl < ApplicationRecord
   validates :long_url, 
     presence: true
 
+  validate :no_spamming
+
   belongs_to :user
   alias_method :submitter, :user
 
@@ -53,6 +55,20 @@ class ShortenedUrl < ApplicationRecord
     loop do
       code = SecureRandom.urlsafe_base64
       return code if !self.exists?(short_url: code)
+    end
+  end
+
+  private
+
+  def no_spamming
+    fifth_latest = submitter
+      .submitted_urls
+      .order('created_at DESC')
+      .offset(4)
+      .first
+
+    if fifth_latest && fifth_latest.created_at > 1.minutes.ago
+      errors.add(:base, 'Too many submitted URLs in the last minute.')
     end
   end
 end

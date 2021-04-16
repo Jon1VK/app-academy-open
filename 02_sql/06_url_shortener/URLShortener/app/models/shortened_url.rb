@@ -23,8 +23,21 @@ class ShortenedUrl < ApplicationRecord
   has_many :visits
   
   has_many :visitors,
+    -> { distinct },
     through: :visits,
     source: :user
+
+  def num_clicks
+    visits.count
+  end
+
+  def num_uniques
+    visitors.count
+  end
+
+  def num_recent_uniques
+    visits.select(:user_id).where(updated_at: 10.minutes.ago..Time.now).distinct.count
+  end
 
   def self.create_from(attributes)
     p attributes

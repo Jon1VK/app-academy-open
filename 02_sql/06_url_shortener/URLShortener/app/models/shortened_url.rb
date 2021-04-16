@@ -24,14 +24,16 @@ class ShortenedUrl < ApplicationRecord
   belongs_to :user
   alias_method :submitter, :user
 
-  has_many :visits
+  has_many :visits,
+    dependent: :destroy
   
   has_many :visitors,
     -> { distinct },
     through: :visits,
     source: :user
 
-  has_many :taggings
+  has_many :taggings,
+    dependent: :destroy
 
   has_many :tag_topics,
     through: :taggings,
@@ -49,8 +51,8 @@ class ShortenedUrl < ApplicationRecord
     visits.select(:user_id).where(updated_at: 10.minutes.ago..Time.now).distinct.count
   end
 
-  def self.create_from(attributes)
-    self.create(**attributes, short_url: self.random_code)
+  def self.create_for_user_and_long_url!(user, long_url)
+    self.create!(user: user, long_url: long_url, short_url: self.random_code)
   end
 
   def self.random_code
@@ -58,6 +60,18 @@ class ShortenedUrl < ApplicationRecord
       code = SecureRandom.urlsafe_base64
       return code if !self.exists?(short_url: code)
     end
+  end
+
+  def self.prune(n)
+    self.joins(:user)
+      .left_outer_joins(:visits)
+      .group(:id)
+      .where(user: { premium: false })
+      .having(<<-SQL, n.minutes.ago, n.minutes.ago)
+        (MAX(visits.created_at) IS NULL AND shortened_urls.created_at < ?) OR
+        MAX(visits.created_at) < ?
+      SQL
+      .destroy_all
   end
 
   private

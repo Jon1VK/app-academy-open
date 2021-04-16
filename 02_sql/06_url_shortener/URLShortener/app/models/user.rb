@@ -13,10 +13,13 @@ class User < ApplicationRecord
         presence: true,
         uniqueness: true
 
-    has_many :shortened_urls
+    has_many :shortened_urls,
+        dependent: :destroy
+        
     alias_method :submitted_urls, :shortened_urls
 
-    has_many :visits
+    has_many :visits,
+        dependent: :destroy
 
     has_many :visited_urls,
         -> { distinct },

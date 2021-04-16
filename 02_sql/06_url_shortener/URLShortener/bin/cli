@@ -26,7 +26,7 @@ when '0'
     long_url = gets.chomp
     puts
 
-    shortened_url = ShortenedUrl.create_from(user: user, long_url: long_url)
+    shortened_url = ShortenedUrl.create_for_user_and_long_url!(user, long_url)
     puts "Short URL is #{shortened_url.short_url}"
 when '1'
     print "Type in the short url\n> "
@@ -34,7 +34,7 @@ when '1'
     puts
 
     shortened_url = ShortenedUrl.find_by(short_url: short_url)
-    Visit.record_visit(user: user, shortened_url: shortened_url)
+    Visit.record_visit!(user: user, shortened_url: shortened_url)
     puts "Launching #{shortened_url.long_url}"
     Launchy.open(shortened_url.long_url)
 else

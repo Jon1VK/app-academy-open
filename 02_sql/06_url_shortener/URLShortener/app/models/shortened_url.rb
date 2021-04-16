@@ -19,6 +19,8 @@ class ShortenedUrl < ApplicationRecord
 
   validate :no_spamming
 
+  validate :nonpremium_max
+
   belongs_to :user
   alias_method :submitter, :user
 
@@ -69,6 +71,16 @@ class ShortenedUrl < ApplicationRecord
 
     if fifth_latest && fifth_latest.created_at > 1.minutes.ago
       errors.add(:base, 'Too many submitted URLs in the last minute.')
+    end
+  end
+
+  def nonpremium_max
+    count = submitter
+      .submitted_urls
+      .count
+
+    unless submitter.premium || count < 5
+      errors.add(:base, 'Too many submitted URLs for nonpremium user.')
     end
   end
 end

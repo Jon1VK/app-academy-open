@@ -40,7 +40,6 @@ class ShortenedUrl < ApplicationRecord
   end
 
   def self.create_from(attributes)
-    p attributes
     self.create(**attributes, short_url: self.random_code)
   end
 

@@ -89,13 +89,13 @@ describe 'alphabetized_actors' do
 			{id: 5141, name: '&#193;ngela Molina'},
 			{id: 4238, name: '&#201;lisabeth Bourgine'},
 			{id: 2143, name: '&#201;lodie Bouchez'},
-			{id: 1876, name: '\'Weird Al\' Yankovic'},
-			{id: 4235, name: 'A.J. Langer'},
 			{id: 4234, name: 'Aaliyah'},
 			{id: 940, name: 'Aaron Eckhart'},
 			{id: 4223, name: 'Aaron Michael Metchik'},
 			{id: 4231, name: 'Abdel Ahmed Ghili'},
-			{id: 1881, name: 'Abe Vigoda'}
+			{id: 1881, name: 'Abe Vigoda'},
+			{id: 2133, name: 'Abel Ferrara'},
+			{id: 4239, name: 'Abraham Benrubi'},
 		].map { |el| el.stringify_keys }
 
 		expect(subject).to contain_exactly(*expected_response)

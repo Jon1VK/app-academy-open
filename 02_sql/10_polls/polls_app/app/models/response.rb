@@ -10,6 +10,7 @@
 #
 class Response < ApplicationRecord
   validate :respondent_has_not_answered_yet
+  validate :respondent_is_not_the_author
 
   belongs_to :respondent,
     class_name: 'User',
@@ -33,6 +34,12 @@ class Response < ApplicationRecord
   def respondent_has_not_answered_yet
     if self.respondent_already_answered?
       errors.add(:base, 'User has alreaydy answered')
+    end
+  end
+
+  def respondent_is_not_the_author
+    if self.question.poll.user_id == self.user_id
+      errors.add(:base, 'User can\'t answer to his/her authored polls')
     end
   end
 end

@@ -9,6 +9,9 @@
 #  updated_at       :datetime         not null
 #
 class Response < ApplicationRecord
-  belongs_to :user
+  belongs_to :respondent,
+    class_name: 'User',
+    foreign_key: :user_id
+
   belongs_to :answer_choice
 end

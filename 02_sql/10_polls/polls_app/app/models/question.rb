@@ -9,5 +9,10 @@
 #  updated_at :datetime         not null
 #
 class Question < ApplicationRecord
+  validates :text,
+    presence: true
+
   belongs_to :poll
+
+  has_many :answer_choices
 end

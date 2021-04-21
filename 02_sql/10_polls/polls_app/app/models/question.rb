@@ -15,4 +15,7 @@ class Question < ApplicationRecord
   belongs_to :poll
 
   has_many :answer_choices
+
+  has_many :responses,
+    through: :answer_choices
 end

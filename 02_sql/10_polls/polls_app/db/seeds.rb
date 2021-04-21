@@ -23,3 +23,4 @@ a2 = AnswerChoice.create!(text: 'Answer 2: Question 1', question: q1)
 a3 = AnswerChoice.create!(text: 'Answer 3: Question 1', question: q1)
 
 r1 = Response.create!(respondent: u3, answer_choice: a1)
+r2 = Response.create!(respondent: u2, answer_choice: a1)

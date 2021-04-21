@@ -18,4 +18,17 @@ class Question < ApplicationRecord
 
   has_many :responses,
     through: :answer_choices
+
+  def results
+    choices = self.answer_choices
+      .left_outer_joins(:responses)
+      .select('answer_choices.*', 'COUNT(responses.id) AS response_count')
+      .group(:id)
+
+    response_counts = {}
+    choices.each do |choice|
+      response_counts[choice.text] = choice.response_count
+    end
+    response_counts
+  end
 end

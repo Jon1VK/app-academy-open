@@ -10,9 +10,9 @@ u1 = User.create!(username: 'Joni Vainio-Kaila')
 u2 = User.create!(username: 'Elli Esimerkki')
 u3 = User.create!(username: 'Matti Mallikas')
 
-p1 = Poll.create!(title: 'Poll 1: Joni', user: u1)
-p2 = Poll.create!(title: 'Poll 2: Joni', user: u1)
-p3 = Poll.create!(title: 'Poll 3: Elli', user: u2)
+p1 = Poll.create!(title: 'Poll 1: Joni', author: u1)
+p2 = Poll.create!(title: 'Poll 2: Joni', author: u1)
+p3 = Poll.create!(title: 'Poll 3: Elli', author: u2)
 
 q1 = Question.create!(text: 'Question 1: Poll 1', poll: p1)
 q2 = Question.create!(text: 'Question 2: Poll 1', poll: p1)

@@ -13,3 +13,7 @@ u3 = User.create!(username: "Matti")
 a1 = Artwork.create!(artist: u1, title: "Artwork 1", image_url: 'URL')
 a2 = Artwork.create!(artist: u1, title: "Artwork 2", image_url: 'URL')
 a3 = Artwork.create!(artist: u2, title: "Artwork 3", image_url: 'URL')
+
+as1 = ArtworkShare.create!(artwork: a1, viewer: u2)
+as2 = ArtworkShare.create!(artwork: a1, viewer: u3)
+as3 = ArtworkShare.create!(artwork: a2, viewer: u2)

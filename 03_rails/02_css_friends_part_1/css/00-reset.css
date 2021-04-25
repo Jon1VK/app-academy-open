@@ -18,7 +18,7 @@ span, article, footer, time, small {
   text-decoration: inherit;
   vertical-align: baseline;
 
-  background: inherit;
+  background: transparent;
 }
 
 ul {

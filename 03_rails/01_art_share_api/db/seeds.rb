@@ -17,3 +17,7 @@ a3 = Artwork.create!(artist: u2, title: "Artwork 3", image_url: 'URL')
 as1 = ArtworkShare.create!(artwork: a1, viewer: u2)
 as2 = ArtworkShare.create!(artwork: a1, viewer: u3)
 as3 = ArtworkShare.create!(artwork: a2, viewer: u2)
+
+c1 = Comment.create!(author: u3, artwork: a1, body: 'Comment 1')
+c2 = Comment.create!(author: u3, artwork: a2, body: 'Comment 2')
+c3 = Comment.create!(author: u2, artwork: a1, body: 'Comment 3')

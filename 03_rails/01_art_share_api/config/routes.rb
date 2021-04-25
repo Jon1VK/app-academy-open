@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:new, :edit] do
     resources :artworks, only: :index
+    resources :comments, only: :index
   end
   # get 'users/', to: 'users#index', as: 'users'
   # post 'users/', to: 'users#create'
@@ -11,7 +12,11 @@ Rails.application.routes.draw do
   # put 'users/:id', to: 'users#update'
   # delete 'users/:id', to: 'users#destroy'
 
-  resources :artworks, except: [:index, :new, :edit]
+  resources :artworks, except: [:index, :new, :edit] do
+    resources :comments, only: :index
+  end
 
   resources :artwork_shares, only: [:create, :destroy]
+
+  resources :comments, only: [:create, :destroy]
 end

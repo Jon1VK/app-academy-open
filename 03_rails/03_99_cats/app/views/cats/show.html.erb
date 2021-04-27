@@ -1,7 +1,7 @@
 <%= render @cat %>
 
 <h1>Rental requests</h1>
-<% if @cat_rental_requests.empty? %>
+<% if @cat_rental_requests.length == 0 %>
   <p><%= @cat.name %> has no rental requests.</p>
 <% else %>
   <%= render 'cat_rental_requests/table', cat_rental_requests: @cat_rental_requests %>

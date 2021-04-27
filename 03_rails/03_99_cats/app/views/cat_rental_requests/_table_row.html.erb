@@ -1,5 +1,5 @@
 <tr>
   <td><%= cat_rental_request.start_date %></td>
   <td><%= cat_rental_request.end_date %></td>
-  <td><%= cat_rental_request.status %></td>
+  <td><%= render 'cat_rental_requests/status', cat_rental_request: cat_rental_request %></td>
 </tr>

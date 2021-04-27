@@ -25,6 +25,21 @@ class CatRentalRequest < ApplicationRecord
 
   belongs_to :cat
 
+  def approve!
+    self.transaction do
+      overlapping_pending_requests.each(&:deny!)
+      update!(status: 'APPROVED')
+    end
+  end
+
+  def deny!
+    update!(status: 'DENIED')
+  end
+
+  def pending?
+    status == "PENDING"
+  end
+
   private
   def end_date_is_not_before_start_date
     if self.end_date < self.start_date
@@ -39,6 +54,10 @@ class CatRentalRequest < ApplicationRecord
         cat_id: self.cat_id,
         start_date: [self.start_date..self.end_date],
         end_date: [self.start_date..self.end_date])
+  end
+
+  def overlapping_pending_requests
+    overlapping_requests.where(status: "PENDING")
   end
 
   def overlapping_approved_requests

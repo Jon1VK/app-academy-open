@@ -23,6 +23,9 @@ class Cat < ApplicationRecord
   validates :color,
     inclusion: { in: Cat::COLORS }
 
+  has_many :cat_rental_requests,
+    dependent: :destroy
+
   def age
     ApplicationController.helpers.time_ago_in_words(self.birth_date)
   end

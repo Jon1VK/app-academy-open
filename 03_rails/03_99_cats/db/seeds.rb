@@ -13,3 +13,5 @@ c3 = Cat.create!(name: 'Cat 3', birth_date: '2021/01/01', sex: 'M', color: 'brow
 crr1 = CatRentalRequest.create!(cat: c1, start_date: '2019/01/01', end_date: '2019/01/02')
 crr2 = CatRentalRequest.create!(cat: c1, start_date: '2019/02/02', end_date: '2019/02/03')
 crr1 = CatRentalRequest.create!(cat: c2, start_date: '2019/01/01', end_date: '2019/01/02')
+
+u = User.create!(username: 'Joni', password: '123456')

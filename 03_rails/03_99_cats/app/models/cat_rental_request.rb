@@ -9,6 +9,7 @@
 #  status     :string           default("PENDING"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :bigint           not null
 #
 class CatRentalRequest < ApplicationRecord
   STATUSES = %w(PENDING APPROVED DENIED)
@@ -24,6 +25,7 @@ class CatRentalRequest < ApplicationRecord
   validate :does_not_overlap_approved_request
 
   belongs_to :cat
+  belongs_to :requester, class_name: 'User', foreign_key: :user_id
 
   def approve!
     self.transaction do

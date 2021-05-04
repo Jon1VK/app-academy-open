@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  helper_method :logged_in?, :current_user
+  helper_method :logged_in?
+  helper_method :current_user
+  helper_method :owner_of_the_cat?
 
   private
 
@@ -22,5 +24,17 @@ class ApplicationController < ActionController::Base
 
   def require_logged_out
     redirect_to root_url if logged_in?
+  end
+
+  def require_logged_in
+    redirect_to new_session_url if !logged_in?
+  end
+
+  def owner_of_the_cat?
+    logged_in? && current_user.cats.exists?(params[:id])
+  end
+
+  def require_owner_of_the_cat
+    redirect_to root_url unless owner_of_the_cat?
   end
 end

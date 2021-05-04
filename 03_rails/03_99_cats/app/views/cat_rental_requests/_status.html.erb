@@ -1,4 +1,4 @@
-<% if cat_rental_request.pending? %>
+<% if cat_rental_request.pending? && owner_of_the_cat? %>
   <form action="<%= approve_cat_rental_request_url(cat_rental_request) %>" method="post">
     <input type="submit" value="Approve">
   </form>

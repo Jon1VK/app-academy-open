@@ -25,4 +25,6 @@
   </tbody>
 </table>
 
-<a href="<%= edit_cat_url(cat) %>">Edit <%= cat.name %></a>
+<% if owner_of_the_cat? %>
+  <a href="<%= edit_cat_url(cat) %>">Edit <%= cat.name %></a>
+<% end %>

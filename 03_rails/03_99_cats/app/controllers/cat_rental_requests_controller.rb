@@ -1,4 +1,7 @@
 class CatRentalRequestsController < ApplicationController
+  before_action :require_logged_in
+  before_action :require_owner_of_the_cat, only: [:approve, :deny]
+
   def new
     @cat_rental_request = CatRentalRequest.new
     @cat_rental_request.cat_id = params[:cat_id]

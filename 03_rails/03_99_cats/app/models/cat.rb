@@ -10,9 +10,15 @@
 #  description :text
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 class Cat < ApplicationRecord
   COLORS = %w(black white orange brown gray)
+
+  belongs_to :owner, class_name: 'User', foreign_key: :user_id
+
+  has_many :cat_rental_requests,
+    dependent: :destroy
 
   validates :name, :birth_date,
     presence: true
@@ -22,9 +28,6 @@ class Cat < ApplicationRecord
 
   validates :color,
     inclusion: { in: Cat::COLORS }
-
-  has_many :cat_rental_requests,
-    dependent: :destroy
 
   def age
     ApplicationController.helpers.time_ago_in_words(self.birth_date)

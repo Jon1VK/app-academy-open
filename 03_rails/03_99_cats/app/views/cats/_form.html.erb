@@ -8,6 +8,8 @@
     <input type="hidden" name="_method" value="patch">
   <% end %>
 
+  <%= token_tag %>
+
   <label for="cat_name">Name</label>
   <input type="text" name="cat[name]" id="cat_name" value="<%= cat.name %>">
 

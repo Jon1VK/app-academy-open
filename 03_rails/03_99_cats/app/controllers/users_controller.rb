@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 
     if user.save
       login_user(user)
+      msg = UserMailer.welcome_email(user)
+      msg.deliver_now
       redirect_to root_url
     else
       render :new

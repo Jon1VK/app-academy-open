@@ -2,14 +2,29 @@
 <html>
   <head>
     <title>MusicApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <link href="https://fonts.googleapis.com/css2?family=Faster+One&display=swap&family=Montserrat&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <h1>Music App</h1>
+
+      <nav>
+        <% if logged_in? %>
+          <span class="current-user"><%= current_user.email %></span>
+          <%= button_to 'Logout', session_url, class: 'button button_alt', method: :delete %>
+        <% else %>
+          <%= link_to 'Login', new_session_url, class: 'button' %>
+          <%= link_to 'Register', new_user_url, class: 'button' %>
+        <% end %>
+      </nav>
+    </header>
+
     <%= yield %>
   </body>
 </html>

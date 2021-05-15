@@ -13,3 +13,86 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Montserrat, sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-family: 'Faster One', cursive;
+  font-weight: normal;
+  font-size: 60px;
+}
+
+.current-user {
+  display: inline-block;
+  margin-right: 16px;
+  font-weight: bold;
+}
+
+.button {
+  display: inline-block;
+  padding: 16px 32px;
+  border-radius: 8px;
+  margin-right: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.button_alt {
+  background-color: rgb(180, 0, 0)
+}
+
+.button:last-of-type {
+  margin-right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+}
+
+.button_to {
+  display: inline-block;
+}
+
+input {
+  font: inherit;
+}
+
+input[type="submit"] {
+  align-self: center;
+  padding: 16px 32px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-right: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.error {
+  color: rgb(180, 0, 0);
+  font-weight: bold;
+  font-size: 80%;
+  margin-top: 8px;
+}

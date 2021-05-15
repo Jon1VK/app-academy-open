@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_not_logged_in
+  # before_action :require_not_logged_in
   
   def new
     @user = User.new(flash[:user])

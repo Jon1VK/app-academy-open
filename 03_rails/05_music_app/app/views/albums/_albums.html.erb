@@ -1,0 +1,5 @@
+<div class="button-row">
+  <% albums.each do |album| %>
+    <%= link_to "#{album.title}", album_url(album), class: 'button button-album' %>
+  <% end %>
+</div>

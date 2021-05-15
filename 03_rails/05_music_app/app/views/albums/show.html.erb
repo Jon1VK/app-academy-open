@@ -1,0 +1,15 @@
+<div class="container">
+  <h1><%= @album.title %> from band <%= @album.band.name %></h1>
+  <p><%= @album.live ? "Live" : "Studio" %> recorded album from year <%= @album.year %></p>
+
+  <h2>Links</h2>
+
+  <div class="button-row">
+    <%= link_to 'Edit album', edit_album_url(@album), class: 'button' %>
+    <%= button_to 'Delete album', album_url(@album), method: 'delete', class: 'button button_alt' %>
+  </div>
+
+  <div class="button-row">
+    <%= link_to "Back to band #{@album.band.name}", band_url(@album.band), class: 'button button_band' %>
+  </div>
+</div>

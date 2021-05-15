@@ -62,6 +62,14 @@ header h1 a {
   background-color: rgb(136, 209, 0);
 }
 
+.button-album {
+  background-color: rgb(189, 116, 0);
+}
+
+.button-track {
+  background-color: darkslateblue;
+}
+
 .button:last-child, .button_to:last-child .button {
   margin-right: 0;
 }

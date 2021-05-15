@@ -1,0 +1,5 @@
+<div class="button-row">
+  <% tracks.each do |track| %>
+    <%= link_to "#{track.order}. #{track.title}", track_url(track), class: 'button button-track' %>
+  <% end %>
+</div>

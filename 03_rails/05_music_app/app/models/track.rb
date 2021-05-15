@@ -14,6 +14,8 @@
 class Track < ApplicationRecord
   belongs_to :album
 
+  delegate :band, to: :album
+
   validates :title, presence: true
   validates :order, presence: true, uniqueness: { scope: :album_id }
 end

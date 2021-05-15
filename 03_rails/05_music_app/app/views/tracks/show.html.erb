@@ -1,0 +1,17 @@
+<div class="container">
+  <h1><%= @track.order %>. <%= "bonus " if @track.bonus %>track <%= @track.title %> of album <%= @track.album.title %> from <%= @track.band.name %></h1>
+  
+  <h2>Lyrics</h2>
+  <pre><%= ugly_lyrics(@track.lyrics) %></pre>
+
+  <h2>Links</h2>
+
+  <div class="button-row">
+    <%= link_to 'Edit track', edit_track_url(@track), class: 'button' %>
+    <%= button_to 'Delete track', track_url(@track), method: 'delete', class: 'button button_alt' %>
+  </div>
+
+  <div class="button-row">
+    <%= link_to "Back to album #{@track.album.title}", album_url(@track.album), class: 'button button-album' %>
+  </div>
+</div>

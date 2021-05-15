@@ -8,7 +8,7 @@
 #  updated_at :datetime         not null
 #
 class Band < ApplicationRecord
-  has_many :albums
+  has_many :albums, dependent: :destroy
 
   validates :name, presence: true
 end

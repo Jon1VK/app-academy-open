@@ -13,6 +13,8 @@
 class Album < ApplicationRecord
   belongs_to :band
 
+  has_many :tracks, dependent: :destroy
+
   validates :title, presence: true, uniqueness: { scope: :band_id }
   validates :year, presence: true
 end

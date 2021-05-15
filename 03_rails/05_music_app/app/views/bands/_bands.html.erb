@@ -1,0 +1,5 @@
+<div class="button-row">
+  <% bands.each do |band| %>
+    <%= link_to "#{band.name}", band_url(band), class: 'button button_band' %>
+  <% end %>
+</div>

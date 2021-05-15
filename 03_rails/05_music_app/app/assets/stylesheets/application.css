@@ -32,6 +32,11 @@ header h1 {
   font-size: 60px;
 }
 
+header h1 a {
+  color: black;
+  text-decoration: none;
+}
+
 .current-user {
   display: inline-block;
   margin-right: 16px;
@@ -53,8 +58,23 @@ header h1 {
   background-color: rgb(180, 0, 0)
 }
 
-.button:last-of-type {
+.button_band {
+  background-color: rgb(136, 209, 0);
+}
+
+.button:last-child, .button_to:last-child .button {
   margin-right: 0;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.button-row .button {
+  margin-bottom: 16px;
 }
 
 .container {

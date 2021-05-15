@@ -1,0 +1,14 @@
+<div class="container">
+  <h1><%= @band.name %></h1>
+
+  <h2>Links</h2>
+
+  <div class="button-row">
+    <%= link_to 'Edit band', edit_band_url(@band), class: 'button' %>
+    <%= button_to 'Delete band', band_url(@band), method: 'delete', class: 'button button_alt' %>
+  </div>
+
+  <div class="button-row">
+    <%= link_to 'Back to bands', bands_url, class: 'button button_band' %>
+  </div>
+</div>

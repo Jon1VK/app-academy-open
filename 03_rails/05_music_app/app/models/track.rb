@@ -13,8 +13,9 @@
 #
 class Track < ApplicationRecord
   belongs_to :album
-
   delegate :band, to: :album
+
+  has_many :notes, dependent: :destroy
 
   validates :title, presence: true
   validates :order, presence: true, uniqueness: { scope: :album_id }

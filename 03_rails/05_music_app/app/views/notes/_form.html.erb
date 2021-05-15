@@ -1,0 +1,14 @@
+<form action="<%= notes_url %>" method="POST">
+  <%= token_tag %>
+
+  <input type="hidden" name="note[track_id]" value="<%= track.id %>">
+
+  <div class="form-input">
+    <label for="note">Add a note</label>
+    <textarea name="note[note]" id="note" cols="30" rows="5"></textarea>
+  </div>
+
+  <div class="form-input">
+    <input type="submit" value="Add note!">
+  </div>
+</form>

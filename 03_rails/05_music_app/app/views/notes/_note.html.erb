@@ -1,0 +1,7 @@
+<div class="note">
+  <p><%= note.note %> - <%= note.user.email %></p>
+
+  <% if current_user == note.user %>
+    <%= link_to 'Delete', note_url(note), method: 'DELETE', class: 'button button_alt' %>
+  <% end %>
+</div>

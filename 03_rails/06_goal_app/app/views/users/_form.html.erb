@@ -1,0 +1,22 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <ul class="my-3 list-unstyled">
+        <% user.errors.each do |error| %>
+          <li class="list-item alert alert-danger"><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="my-3">
+    <%= form.label :username, class: 'form-label' %>
+    <%= form.text_field :username, class: 'form-control' %>
+  </div>
+  <div class="my-3">
+    <%= form.label :password, class: 'form-label' %>
+    <%= form.password_field :password, class: 'form-control' %>
+  </div>
+  <div class="my-3">
+    <%= form.submit 'Sign Up', class: 'btn btn-primary' %>
+  </div>
+<% end %>

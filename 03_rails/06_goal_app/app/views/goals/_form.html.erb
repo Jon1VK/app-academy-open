@@ -1,0 +1,30 @@
+<%= form_with(model: [goal.user, goal]) do |f| %>
+  <% if goal.errors.any? %>
+    <div id="error_explanation">
+      <ul class="my-3 list-unstyled">
+        <% goal.errors.full_messages.each do |msg| %>
+          <li class="list-item alert alert-danger"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="mb-3">
+    <%= f.label :title, class: 'form-label' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :details, class: 'form-label' %>
+    <%= f.text_area :details, class: 'form-control' %>
+  </div>
+  <div class="form-check mb-3">
+    <%= f.check_box :private, class: 'form-check-input' %>
+    <%= f.label :private, class: 'form-check-label' %>
+  </div>
+  <div class="form-check mb-3">
+    <%= f.check_box :completed, class: 'form-check-input' %>
+    <%= f.label :completed, class: 'form-check-label' %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Add Goal', class: 'btn btn-primary' %>
+  </div>
+<% end %>

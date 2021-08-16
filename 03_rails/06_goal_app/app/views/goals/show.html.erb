@@ -1,0 +1,16 @@
+<h1 class="my-3"><%= @goal.user.username %>'s Goal</h1>
+<dl>
+  <dt>Title</dt>
+  <dd><%= @goal.title %></dd>
+  <dt>Details</dt>
+  <dd><%= @goal.details %></dd>
+  <dt>Status</dt>
+  <dd><%= @goal.completed ? 'Completed' : 'Ongoing' %></dd>
+</dl>
+<% if logged_in_as(@goal.user) %>
+  <% if  @goal.completed %>
+    <%= button_to 'Uncomplete', @goal, params: {goal: {completed: false}}, method: :put, class: 'btn btn-secondary' %>
+  <% else %>
+    <%= button_to 'Complete', @goal, params: {goal: {completed: true}}, method: :put, class: 'btn btn-success' %>
+  <% end %>
+<% end %>

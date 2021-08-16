@@ -20,13 +20,17 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Goal < ApplicationRecord
-  default_scope { order(:created_at) }
-  scope :public_goals, -> { where(private: false) }
+require 'rails_helper'
 
-  belongs_to :user
+RSpec.describe Goal, type: :model do
+  subject { FactoryBot.build(:goal) }
 
-  validates :title, presence: true, uniqueness: { scope: :user_id }
-  validates :private, inclusion: { in: [true, false] }
-  validates :completed, inclusion: { in: [true, false] }
+  describe 'validations' do
+    it { should validate_presence_of(:title) }
+    it { should validate_uniqueness_of(:title).scoped_to(:user_id) }
+  end
+
+  describe "associations" do
+    it { should belong_to(:user) }
+  end
 end

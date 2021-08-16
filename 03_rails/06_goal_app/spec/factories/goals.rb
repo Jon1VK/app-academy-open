@@ -20,13 +20,12 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Goal < ApplicationRecord
-  default_scope { order(:created_at) }
-  scope :public_goals, -> { where(private: false) }
-
-  belongs_to :user
-
-  validates :title, presence: true, uniqueness: { scope: :user_id }
-  validates :private, inclusion: { in: [true, false] }
-  validates :completed, inclusion: { in: [true, false] }
+FactoryBot.define do
+  factory :goal do
+    title { Faker::Lorem.unique.word }
+    details { Faker::Lorem.sentence }
+    private { [true, false].sample }
+    completed { [true, false].sample }
+    association :user
+  end
 end

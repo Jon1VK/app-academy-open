@@ -14,8 +14,8 @@
 #
 FactoryBot.define do
   factory :user do
-    username { Faker::Internet.username }
-    password { Faker::Internet.password(min_length: 6) }
+    username { Faker::Name.unique.first_name }
+    password { '123456' }
 
     factory :invalid_user do
       password { '' }

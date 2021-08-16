@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
 
   resource :sessions, only: [:new, :create, :destroy]
-  resources :users, except: [:edit, :update, :destroy]
+  resources :users, only: [:index, :show, :new, :create] do
+    resources :goals, only: [:new, :create]
+  end
+  resources :goals, only: [:show, :update, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -26,6 +26,8 @@ class Goal < ApplicationRecord
 
   belongs_to :user
 
+  has_many :comments, as: :commentable, dependent: :destroy
+
   validates :title, presence: true, uniqueness: { scope: :user_id }
   validates :private, inclusion: { in: [true, false] }
   validates :completed, inclusion: { in: [true, false] }

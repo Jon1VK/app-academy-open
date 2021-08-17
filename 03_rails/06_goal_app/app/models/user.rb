@@ -13,8 +13,9 @@
 #  index_users_on_username  (username) UNIQUE
 #
 class User < ApplicationRecord
+  include Commentable
+
   has_many :goals, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
   has_secure_password
 
   validates :username, presence: true, uniqueness: true

@@ -21,12 +21,12 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Goal < ApplicationRecord
+  include Commentable
+
   default_scope { order(:created_at) }
   scope :public_goals, -> { where(private: false) }
 
   belongs_to :user
-
-  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :title, presence: true, uniqueness: { scope: :user_id }
   validates :private, inclusion: { in: [true, false] }

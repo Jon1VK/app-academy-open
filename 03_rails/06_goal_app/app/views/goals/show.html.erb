@@ -14,3 +14,9 @@
     <%= button_to 'Complete', @goal, params: {goal: {completed: true}}, method: :put, class: 'btn btn-success' %>
   <% end %>
 <% end %>
+<h2>Comments</h2>
+<%= render(@goal.comments) || '<p>No comments</p>'.html_safe %>
+<% if current_user %>
+  <%= render partial: 'comments/form', locals: { commentable: @goal } %>
+<% end %>
+<br/>

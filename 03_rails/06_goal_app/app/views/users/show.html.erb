@@ -1,51 +1,54 @@
 <h1 class="my-3"><%= @user.username %>'s Goals</h1>
-<div class="table-responsive">
-  <table class="table table-striped table-hover align-middle">
-    <tr class="table-primary">
-      <th>Title</th>
-      <th>Details</th>
-      <% if logged_in_as(@user) %>
-        <th class="text-center">Private</th>
-      <% end %>
-      <th class="text-center">Completed</th>
-      <th class="text-end">
-        <% if logged_in_as(@user) %>
-          <%= link_to '<i style="font-size: 1.5rem; color: green;" class="bi bi-plus-circle-fill"></i>'.html_safe, new_user_goal_url(@user), class: 'me-2' %>
-        <% end %>
-      </th>
-    </tr>
-    <% if @goals.empty? %>
-      <tr>
-        <td colspan="6">No goals to show...</td>
-      </tr>
-    <% else %>
-      <% @goals.each do |goal| %>
-        <tr>
-          <td class="fw-bold"><%= goal.title %></td>
-          <td><%= goal.details[0...30]... %></td>
-          <% if logged_in_as(@user) %>
-            <td class="text-center"><%= "&#10003;".html_safe if goal.private %></td>
-          <% end %>
-          <td class="text-center">
-            <% if logged_in_as(@user) && !goal.completed %>
-              <%= button_to 'Done', goal, params: {goal: {completed: true}}, method: :put, class: 'btn btn-success' %>
-            <% elsif logged_in_as(@user) && goal.completed %>
-              <%= button_to 'Undo', goal, params: {goal: {completed: false}}, method: :put, class: 'btn btn-secondary' %>
-            <% else %>
-              <%= "&#x2713;".html_safe if goal.completed %>
-            <% end %>
-          </td>
-          <td>
-            <div class="d-flex justify-content-end">
-              <%= button_to 'Show', goal, method: :get, class: 'btn btn-primary me-2' %>
-              <% if current_user&.id == @user.id %>
-                <%= button_to 'Destroy', goal, method: :delete, class: 'btn btn-danger me-2' %>
-              <% end %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
+<table class="table table-striped table-hover align-middle">
+  <tr class="table-primary">
+    <th>Title</th>
+    <th>Details</th>
+    <% if logged_in_as(@user) %>
+      <th class="text-center">Private</th>
     <% end %>
-  </table>
-</div>
-<br />
+    <th class="text-center">Completed</th>
+    <th class="text-end">
+      <% if logged_in_as(@user) %>
+        <%= link_to '<i style="font-size: 1.5rem; color: green;" class="bi bi-plus-circle-fill"></i>'.html_safe, new_user_goal_url(@user), class: 'me-2' %>
+      <% end %>
+    </th>
+  </tr>
+  <% if @goals.empty? %>
+    <tr>
+      <td colspan="6">No goals to show...</td>
+    </tr>
+  <% else %>
+    <% @goals.each do |goal| %>
+      <tr>
+        <td class="fw-bold"><%= goal.title %></td>
+        <td><%= goal.details[0...30]... %></td>
+        <% if logged_in_as(@user) %>
+          <td class="text-center"><%= "&#10003;".html_safe if goal.private %></td>
+        <% end %>
+        <td class="text-center">
+          <% if logged_in_as(@user) && !goal.completed %>
+            <%= button_to 'Done', goal, params: {goal: {completed: true}}, method: :put, class: 'btn btn-success' %>
+          <% elsif logged_in_as(@user) && goal.completed %>
+            <%= button_to 'Undo', goal, params: {goal: {completed: false}}, method: :put, class: 'btn btn-secondary' %>
+          <% else %>
+            <%= "&#x2713;".html_safe if goal.completed %>
+          <% end %>
+        </td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <%= button_to 'Show', goal, method: :get, class: 'btn btn-primary me-2' %>
+            <% if current_user&.id == @user.id %>
+              <%= button_to 'Destroy', goal, method: :delete, class: 'btn btn-danger me-2' %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+<h2>Comments</h2>
+<%= render(@user.comments) || '<p>No comments</p>'.html_safe %>
+<% if current_user %>
+  <%= render partial: 'comments/form', locals: { commentable: @user } %>
+<% end %>
+<br/>

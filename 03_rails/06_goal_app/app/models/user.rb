@@ -15,6 +15,7 @@
 class User < ApplicationRecord
   include Commentable
 
+  has_many :authored_comments, class_name: 'Comment'
   has_many :goals, dependent: :destroy
   has_secure_password
 

@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :goals, only: [:new, :create]
   end
   resources :goals, only: [:show, :update, :destroy]
+  resources :comments, only: [:create]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

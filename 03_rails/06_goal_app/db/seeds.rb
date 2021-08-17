@@ -6,9 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Comment.destroy_all
+Goal.destroy_all
 User.destroy_all
 
-8.times do
+users = []
+
+5.times do
   user = FactoryBot.create(:user)
-  8.times { FactoryBot.create(:goal, user: user) }
+
+  users.each do |u|
+    FactoryBot.create(:user_comment, user: user, commentable: u )
+  end
+
+  5.times do
+    goal = FactoryBot.create(:goal, user: user)
+    
+    users.each do |u|
+      FactoryBot.create(:goal_comment, user: u, commentable: goal )
+    end
+  end
+
+  users << user
 end

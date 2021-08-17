@@ -1,0 +1,11 @@
+<%= form_with(model: Comment.new) do |form| %>
+  <%= form.hidden_field :commentable_id, value: commentable.id %>
+  <%= form.hidden_field :commentable_type, value: commentable.class.name %>
+  <div class="my-3">
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+</div>
+<div class="actions">
+  <%= form.submit 'Post Comment', class: 'btn btn-primary' %>
+</div>
+<% end %>

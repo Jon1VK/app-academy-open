@@ -1,0 +1,130 @@
+.sections-sidebar {
+  width: 250px;
+  height: 100%;
+  padding: 20px;
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  box-shadow: 4px 0px 6px 1px rgba(0, 0, 0, 0.09);
+  text-transform: none;
+  font-size: 14px;
+}
+
+.expand {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+
+.sections-sidebar a {
+  display: block;
+  padding: 6px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.sections-sidebar a:hover {
+  background-color: $lightest-blue;
+}
+
+.sections-sidebar li {
+  position: relative;
+}
+
+.sections-sidebar > ul > li:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 25%;
+  right: 5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid $light-gray;
+}
+
+.sections-sidebar > ul > li > a:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  z-index: 1;
+  top: 25%;
+  right: 7px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid white;
+}
+
+.sections-sidebar > ul > li:hover > a:after {
+  border-left-color: $lightest-blue;
+}
+
+.dropdown .subtitle {
+  text-transform: uppercase;
+  display: block;
+  font-weight: bold;
+  color: $dark-gray;
+  padding: 0 5px;
+  margin-bottom: 10px;
+  cursor: initial;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown > ul {
+  cursor: initial;
+  position: absolute;
+  visibility: hidden;
+  top: calc(-50% - 25px);
+  left: 250px;
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 0.3s;
+  width: 245px;
+  border: 1px solid $light-gray;
+  width: 245px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 4px 0px 6px 1px rgba(0, 0, 0, 0.09);
+}
+
+.dropdown > ul:before {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  z-index: 1;
+  top: 25px;
+  left: -25px;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-right: 25px solid white;
+  z-index: 2;
+}
+
+.dropdown > ul:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  z-index: 1;
+  top: 25px;
+  left: -26px;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-right: 25px solid $light-gray;
+}
+
+.dropdown:hover > ul {
+  opacity: 1;
+  visibility: visible;
+}

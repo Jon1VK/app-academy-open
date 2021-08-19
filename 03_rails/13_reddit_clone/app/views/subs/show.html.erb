@@ -1,0 +1,6 @@
+<h1 class="my-3"><%= @sub.title %></h1>
+<% if logged_in_as?(@sub.moderator) %>
+  <%= link_to "Edit", edit_sub_path(@sub), class: "btn btn-primary mb-3" %>
+<% end %>
+<p><strong>Description</strong></p>
+<p><%= @sub.description %></p>

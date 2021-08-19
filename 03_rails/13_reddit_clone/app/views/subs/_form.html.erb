@@ -1,0 +1,22 @@
+<%= form_with(model: sub) do |form| %>
+  <% if sub.errors.any? %>
+    <div id="error_explanation">
+      <ul class="my-3 list-unstyled">
+        <% sub.errors.each do |error| %>
+          <li class="list-item alert alert-danger"><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="my-3">
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="my-3">
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control' %>
+  </div>
+  <div class="my-3">
+    <%= form.submit (sub.persisted? ? 'Edit Sub' : 'Create Sub'), class: 'btn btn-primary' %>
+  </div>
+<% end %>

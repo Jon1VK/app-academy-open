@@ -14,6 +14,7 @@
 #
 class User < ApplicationRecord
   has_secure_password
+  has_many :moderated_subs, class_name: "Sub", foreign_key: "moderator_id"
 
   validates :username, presence: true, uniqueness: true
   validates :password, length: {minimum: 6}, allow_nil: {on: :update}

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in_as?(user)
-    logged_in && current_user == user
+    logged_in? && current_user == user
   end
 
   def current_user
@@ -31,10 +31,8 @@ class ApplicationController < ActionController::Base
   end
 
   def require_logged_in_as(user)
-    require_logged_in
-
-    unless logged_in_as?(user)
-      redirect_back fallback_location: root_url
+    unless logged_in? && logged_in_as?(user)
+      redirect_back fallback_location: root_url, notice: "Access denied."
     end
   end
 end

@@ -21,9 +21,12 @@
 class Post < ApplicationRecord
   belongs_to :author, class_name: 'User'
 
+  has_many :comments
   has_many :post_subs
   has_many :subs, through: :post_subs
 
   validates :title, presence: true
   validates :subs, presence: true
+
+  scope :top_level_comments -> { comments.where(parent_comment: nil) }
 end

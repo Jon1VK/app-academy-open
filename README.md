@@ -9,8 +9,8 @@ In this repository there are my projects and solutions for [App Academy Open - F
 | Software Engineering Foundations |    Done     | [Link](00_software_engineering_foundations) |
 | Ruby                             |    Done     |              [Link](/01_ruby)               |
 | SQL                              |    Done     |               [Link](/02_sql)               |
-| Rails                            | In Progress |              [Link](/03_rails)              |
-| JavaScript                       |             |                      -                      |
+| Rails                            |    Done     |              [Link](/03_rails)              |
+| JavaScript                       | In progress |                      -                      |
 | React                            |             |                      -                      |
 | Full Stack Project               |             |                      -                      |
 | MERN Stack Curriculum            |             |                      -                      |

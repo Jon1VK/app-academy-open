@@ -1,0 +1,7 @@
+<h1>500 Internal Server Error (<%= exception.class.name %>)</h1>
+<p><%= exception.message %></p>
+<ul>
+  <% exception.backtrace.each do |trace| %>
+    <li><%= h(trace) %></li>
+  <% end %>
+</ul>

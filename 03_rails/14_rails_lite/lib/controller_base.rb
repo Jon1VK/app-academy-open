@@ -21,6 +21,7 @@ class ControllerBase
   def redirect_to(url)
     raise 'Render or redirect was already called' if already_built_response?
     res.redirect(url)
+    @session.store_session(res)
     @already_built_response = true
   end
 
@@ -31,6 +32,7 @@ class ControllerBase
     raise 'Render or redirect was already called' if already_built_response?
     res.write(content)
     res.content_type = content_type
+    @session.store_session(res)
     @already_built_response = true
   end
 
@@ -48,6 +50,7 @@ class ControllerBase
 
   # method exposing a `Session` object
   def session
+    @session ||= Session.new(req)
   end
 
   # use this with the router to call action_name (:index, :show, :create...)

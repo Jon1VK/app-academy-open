@@ -1,10 +1,15 @@
 <h1 class="my-3"><%= @post.title %></h1>
-<% if logged_in? %>
-  <%= link_to "New Post", new_post_url, class: "btn btn-primary mb-3" %>
-<% end %>
 <% if logged_in_as?(@post.author) %>
   <%= link_to "Edit", edit_post_url(@post), class: "btn btn-primary mb-3" %>
 <% end %>
+<p>
+  <strong>Subs</strong>
+  <ul>
+    <% @post.subs.each do |sub| %>
+      <li><%=link_to sub.title, sub %></li>
+    <% end %>
+  </ul>
+</p>
 <p>
   <strong>Content</strong><br/>
   <%= @post.content %>
@@ -13,3 +18,12 @@
   <strong>Url</strong><br/>
   <%= @post.url %>
 </p>
+<h2 class='my-2'>Comments</h2>
+<% if @post.top_level_comments.exists? %>
+  <ul class='list-group list-group-flush'>
+    <%= render @post.top_level_comments %>
+  </ul>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>
+<%= render partial: 'comments/form', locals: { post_id: @post.id } %>

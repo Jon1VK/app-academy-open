@@ -28,5 +28,7 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :subs, presence: true
 
-  scope :top_level_comments -> { comments.where(parent_comment: nil) }
+  def top_level_comments
+     comments.where(parent_comment: nil)
+  end
 end

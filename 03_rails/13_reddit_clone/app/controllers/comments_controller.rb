@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_back fallback_location: root_url, notice: 'Comment was successfully created.'
     else
-      render :new
+      redirect_back fallback_location: root_url
     end
   end
 

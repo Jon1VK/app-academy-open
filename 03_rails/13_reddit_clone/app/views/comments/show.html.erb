@@ -1,0 +1,16 @@
+<h1 class="my-3">Comment on post <%= link_to @comment.post.title, @comment.post %></h1>
+<div class='me-3'>
+  <strong><%= @comment.author.username %>:</strong>
+  <div>
+    <%= @comment.content %>
+  </div>
+</div>
+<h2 class='my-2'>Comments</h2>
+<% if @comment.child_comments.exists? %>
+  <ul class='list-group list-group-flush'>
+    <%= render @comment.child_comments %>
+  </ul>
+<% else %>
+  <p>No comments yet.</p>
+<% end %>
+<%= render partial: 'comments/form', locals: { post_id: @comment.post.id, parent_comment_id: @comment.id } %>

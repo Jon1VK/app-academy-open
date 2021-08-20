@@ -1,0 +1,11 @@
+<% parent_comment_id ||= nil %>
+<%= form_with(model: Comment.new) do |form| %>
+  <div class="my-3">
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+  <%= form.hidden_field :post_id, value: post_id %>
+  <%= form.hidden_field :parent_comment_id, value: parent_comment_id %>
+  <div class="actions my-3">
+    <%= form.submit 'Post Comment', class: 'btn btn-secondary' %>
+  </div>
+<% end %>

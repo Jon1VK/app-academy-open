@@ -1,3 +1,4 @@
+<% child_comments = comments_by_parent_id[comment.id] %>
 <li class='ms-2 list-group-item'>
   <div class='my-3 d-flex align-items-center justify-content-between'>
     <div class='me-3'>
@@ -11,10 +12,10 @@
     </div>
     <%= link_to "Show", comment, class: 'btn btn-secondary' %>
   </div>
-  <% if comment.child_comments.exists? %>
+  <% unless child_comments.empty? %>
     <hr style='margin-bottom: 0'>
     <ul class='border-start ms-2 list-group list-group-flush'>
-      <%= render comment.child_comments %>
+      <%= render child_comments, comments_by_parent_id: comments_by_parent_id %>
     </ul>
   <% end %>
 </li>

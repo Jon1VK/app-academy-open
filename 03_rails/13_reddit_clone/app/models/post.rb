@@ -28,7 +28,9 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :subs, presence: true
 
-  def top_level_comments
-     comments.where(parent_comment: nil)
+  def comments_by_parent_id
+    hash = Hash.new { |k, v| k[v] = [] }
+    comments.includes(:author).each { |comment| hash[comment.parent_comment_id] << comment }
+    hash
   end
 end

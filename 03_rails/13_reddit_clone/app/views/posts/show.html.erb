@@ -19,9 +19,9 @@
   <%= @post.url %>
 </p>
 <h2 class='my-2'>Comments</h2>
-<% if @post.top_level_comments.exists? %>
+<% unless @comments_by_parent_id.empty? %>
   <ul class='list-group list-group-flush'>
-    <%= render @post.top_level_comments %>
+    <%= render @comments_by_parent_id[nil], comments_by_parent_id: @comments_by_parent_id %>
   </ul>
 <% else %>
   <p>No comments yet.</p>

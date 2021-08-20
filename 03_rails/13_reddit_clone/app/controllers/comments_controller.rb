@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
   # GET /comments/1
   def show
     @comment = Comment.find(params[:id])
+    @comments_by_parent_id = @comment.post.comments_by_parent_id
   end
 
   # POST /comments

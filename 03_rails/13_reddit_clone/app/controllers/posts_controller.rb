@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @comments_by_parent_id = @post.comments_by_parent_id
   end
 
   # GET /posts/new

@@ -5,6 +5,8 @@ require_relative './session'
 require_relative './flash'
 
 class ControllerBase
+  @@protect_from_forgery = false
+
   attr_reader :req, :res, :params
 
   # Setup the controller
@@ -63,8 +65,33 @@ class ControllerBase
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
+    if @@protect_from_forgery && !req.get?
+      check_authenticity_token
+    end
+
     self.send(name)
     render(name) unless already_built_response?
+  end
+
+  def form_authenticity_token
+    @authenticity_token ||= SecureRandom.urlsafe_base64
+    res.set_cookie('authenticity_token', {
+      value: @authenticity_token,
+      path: '/'
+    })
+    @authenticity_token
+  end
+
+  def check_authenticity_token
+    auth_token = params['authenticity_token']
+    
+    if auth_token.nil? || auth_token != req.cookies['authenticity_token']
+      raise 'Invalid authenticity token'
+    end
+  end
+
+  def self.protect_from_forgery
+    @@protect_from_forgery = true
   end
 end
 

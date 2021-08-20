@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resource :session, only: [:create]
   resources :users, only: [:create]
   resources :subs, except: :destroy
+  resources :posts, except: [:index, :destroy]
 end

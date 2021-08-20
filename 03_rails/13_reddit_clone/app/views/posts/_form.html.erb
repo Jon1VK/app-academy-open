@@ -1,0 +1,35 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <ul class="my-3 list-unstyled">
+        <% post.errors.full_messages.each do |msg| %>
+          <li class="list-item alert alert-danger"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="my-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+  <div class="my-2">
+    Subs
+    <%= form.collection_check_boxes :sub_ids, Sub.all, :id, :title do |b| %>
+      <div class="form-check">
+        <%= b.check_box class: 'form-check-input' %>
+        <%= b.label class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="my-3">
+    <%= form.label :url, class: "form-label" %>
+    <%= form.text_field :url, class: "form-control" %>
+  </div>
+  <div class="my-3">
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= form.submit (post.persisted? ? 'Edit Post' : 'Create Post'), class: 'btn btn-primary' %>
+  </div>
+<% end %>

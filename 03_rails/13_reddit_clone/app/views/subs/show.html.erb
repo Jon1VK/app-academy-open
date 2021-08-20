@@ -1,6 +1,13 @@
 <h1 class="my-3"><%= @sub.title %></h1>
-<% if logged_in_as?(@sub.moderator) %>
-  <%= link_to "Edit", edit_sub_path(@sub), class: "btn btn-primary mb-3" %>
+<% if logged_in? %>
+  <%= link_to "New Post", new_post_url, class: "btn btn-primary mb-3" %>
 <% end %>
-<p><strong>Description</strong></p>
-<p><%= @sub.description %></p>
+<% if logged_in_as?(@sub.moderator) %>
+  <%= link_to "Edit", edit_sub_url(@sub), class: "btn btn-primary mb-3" %>
+<% end %>
+<p>
+  <strong>Description</strong><br/>
+  <%= @sub.description %>
+</p>
+<h2>Posts</h2>
+<%= render partial: 'posts/posts', locals: { posts: @sub.posts } %>

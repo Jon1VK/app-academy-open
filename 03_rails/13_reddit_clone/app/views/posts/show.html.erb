@@ -1,0 +1,15 @@
+<h1 class="my-3"><%= @post.title %></h1>
+<% if logged_in? %>
+  <%= link_to "New Post", new_post_url, class: "btn btn-primary mb-3" %>
+<% end %>
+<% if logged_in_as?(@post.author) %>
+  <%= link_to "Edit", edit_post_url(@post), class: "btn btn-primary mb-3" %>
+<% end %>
+<p>
+  <strong>Content</strong><br/>
+  <%= @post.content %>
+</p>
+<p>
+  <strong>Url</strong><br/>
+  <%= @post.url %>
+</p>

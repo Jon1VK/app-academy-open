@@ -12,14 +12,20 @@
     </tr>
   </thead>
   <tbody>
-    <% @subs.each do |sub| %>
+    <% if @subs.exists? %>
+      <% @subs.each do |sub| %>
+        <tr>
+          <td><%= sub.title %></td>
+          <td><%= sub.description %></td>
+          <td class="text-end">
+            <%= link_to 'Show', sub, class: 'btn btn-primary' %>
+            <%= logged_in_as?(sub.moderator) ? link_to('Edit', edit_sub_path(sub), class: 'btn btn-secondary') : '' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
       <tr>
-        <td><%= sub.title %></td>
-        <td><%= sub.description %></td>
-        <td class="text-end">
-          <%= link_to 'Show', sub, class: 'btn btn-primary' %>
-          <%= logged_in_as?(sub.moderator) ? link_to('Edit', edit_sub_path(sub), class: 'btn btn-secondary') : '' %>
-        </td>
+        <td colspan='3'>No subs yet...</td>
       </tr>
     <% end %>
   </tbody>

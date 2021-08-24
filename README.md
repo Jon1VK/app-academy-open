@@ -10,7 +10,7 @@ In this repository there are my projects and solutions for [App Academy Open - F
 | Ruby                             |    Done     |              [Link](/01_ruby)               |
 | SQL                              |    Done     |               [Link](/02_sql)               |
 | Rails                            |    Done     |              [Link](/03_rails)              |
-| JavaScript                       | In progress |                      -                      |
+| JavaScript                       | In progress |           [Link](/04_javascript)            |
 | React                            |             |                      -                      |
 | Full Stack Project               |             |                      -                      |
 | MERN Stack Curriculum            |             |                      -                      |

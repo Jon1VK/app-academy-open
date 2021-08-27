@@ -1,0 +1,47 @@
+html, body, figure, ul, li, h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+
+  font: inherit;
+}
+
+body {
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+h1 {
+  font-size: 60px;
+  margin: 30px;
+}
+
+figcaption {
+  font-size: 30px;
+  margin: 30px;
+}
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  border: 10px solid black;
+}
+
+li {
+  width: 20px;
+  height: 20px;
+}
+
+.segment {
+  background-color: green;
+}
+
+.apple {
+  background-color: red;
+}

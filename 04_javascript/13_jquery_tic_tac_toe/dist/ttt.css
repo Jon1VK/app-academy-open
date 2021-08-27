@@ -1,0 +1,71 @@
+body, figure, ul, li, h1 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}
+
+h1 {
+  margin: 30px;
+}
+
+figcaption {
+  font-size: 30px;
+  margin: 30px;
+}
+
+ul {
+  width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  border: 5px solid black;
+}
+
+li {
+  font-size: 60px;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  border: 5px solid black;
+}
+
+span {
+  vertical-align: middle;
+}
+
+.unmarked {
+  cursor: pointer;
+}
+
+.unmarked:hover {
+  background-color: yellow;
+}
+
+[class^="mark-"] {
+  cursor: default;
+  background-color: white;
+}
+
+.winner {
+  background-color: green;
+  color: white;
+}
+
+.loser {
+  background-color: white;
+  color: red;
+}

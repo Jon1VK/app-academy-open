@@ -1,0 +1,19 @@
+.user-mentions {
+  margin-bottom: 10px;
+  border-top: 1px solid $gray;
+}
+
+.user-mentions div {
+  width: 400px;
+  text-align: center;
+  padding: 10px 50px;
+  border-bottom: 1px solid $gray;
+}
+
+.user-mentions select {
+  margin-right: 10px;
+  font-size: 16px;
+  font-family: monospace;
+  border-radius: 5px;
+  background-color: white;
+}

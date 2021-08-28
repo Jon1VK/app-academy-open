@@ -1,0 +1,25 @@
+.followers {
+  width: 300px;
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+  font-family: $sans-serif;
+  color: $gray;
+}
+
+.followers a {
+  color: $blue;
+}
+
+.followers a:hover {
+  color: $dark-blue;
+}
+
+.followers ul {
+  padding-left: 20px;
+}
+
+.followers li {
+  padding-top: 20px;
+}

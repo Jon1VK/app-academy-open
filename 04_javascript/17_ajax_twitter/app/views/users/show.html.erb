@@ -1,24 +1,34 @@
-<h1><%= @user.username %></h1>
+<div class="user-follow">
+  <h2><%= @user.username %></h2>
+  <%= render 'follows/form', user: @user %>
+</div>
 
-<%= render 'follows/form', user: @user %>
+<section class="main-content">
+  <section>
+    <ul class="tweets">
+      <% @user.tweets.each do |tweet| %>
+        <li class="tweet"><%= render 'tweets/tweet', tweet: tweet %></li>
+      <% end %>
+    </ul>
+  </section>
 
-<b>Tweets</b>
-<ul>
-  <% @user.tweets.each do |tweet| %>
-    <li><%= render 'tweets/tweet', tweet: tweet %></li>
-  <% end %>
-</ul>
+  <aside>
+    <div class="followers">
+      <span>Followers</span>
+      <ul>
+        <% @user.followers.each do |follower| %>
+          <li><%= link_to '@' + follower.username, user_url(follower.id) %></li>
+        <% end %>
+      </ul>
+    </div>
 
-<b>Followers</b>
-<ul>
-  <% @user.followers.each do |follower| %>
-    <li><%= follower.username %></li>
-  <% end %>
-</ul>
-
-<b>Followees</b>
-<ul>
-  <% @user.followees.each do |followee| %>
-    <li><%= followee.username %></li>
-  <% end %>
-</ul>
+    <div class="followers">
+      <span>Followees</span>
+      <ul>
+        <% @user.followees.each do |followee| %>
+          <li><%= link_to '@' + followee.username, user_url(followee.id) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </aside>
+</section>

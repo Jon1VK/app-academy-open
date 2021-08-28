@@ -1,0 +1,31 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form p {
+  font-family: $sans-serif;
+  color: $gray;
+  margin-top: 20px;
+}
+
+.form a {
+  color: $blue;
+}
+
+.form a:hover {
+  color: $dark-blue;
+}
+
+.form .errors li {
+  color: red;
+  font-family: $sans-serif;
+  margin-bottom: 10px;
+}

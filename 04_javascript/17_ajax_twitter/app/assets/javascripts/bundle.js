@@ -27,6 +27,17 @@ const APIUtil = {
       })
     );
   },
+
+  searchUsers(queryVal) {
+    return Promise.resolve(
+      $.ajax({
+        method: 'GET',
+        url: `/users/search`,
+        dataType: 'json',
+        data: { query: queryVal },
+      })
+    );
+  },
 };
 
 module.exports = APIUtil;
@@ -92,6 +103,58 @@ class FollowToggle {
 module.exports = FollowToggle;
 
 
+/***/ }),
+
+/***/ "./frontend/users_search.js":
+/*!**********************************!*\
+  !*** ./frontend/users_search.js ***!
+  \**********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const APIUtil = __webpack_require__(/*! ./api_util */ "./frontend/api_util.js");
+const FollowToggle = __webpack_require__(/*! ./follow_toggle */ "./frontend/follow_toggle.js");
+
+class UsersSearch {
+  constructor(el) {
+    this.$el = $(el);
+    this.$input = this.$el.find('input');
+    this.$ul = this.$el.find('.users');
+    this.$input.on('input', this.handleInput.bind(this));
+  }
+
+  handleInput() {
+    APIUtil.searchUsers(this.$input.val()).then(this.renderResults.bind(this));
+  }
+
+  renderResults(users) {
+    this.$ul.empty();
+
+    users.forEach((user) => {
+      const $li = $('<li>');
+      $li.appendTo(this.$ul);
+
+      const $link = $('<a>');
+      $link.prop('href', `/users/${user.id}`);
+      $link.text('@' + user.username);
+      $link.appendTo($li);
+
+      if (user.followed != null) {
+        const $button = $('<button>');
+        $button.addClass('follow-toggle button');
+        $button.appendTo($li);
+
+        new FollowToggle($button, {
+          userId: user.id,
+          followState: user.followed ? 'followed' : 'unfollowed',
+        });
+      }
+    });
+  }
+}
+
+module.exports = UsersSearch;
+
+
 /***/ })
 
 /******/ 	});
@@ -128,10 +191,15 @@ var __webpack_exports__ = {};
   !*** ./frontend/twitter.js ***!
   \*****************************/
 const FollowToggle = __webpack_require__(/*! ./follow_toggle */ "./frontend/follow_toggle.js");
+const UsersSearch = __webpack_require__(/*! ./users_search */ "./frontend/users_search.js");
 
 $(() => {
   $('.follow-toggle').each(function () {
     new FollowToggle(this);
+  });
+
+  $('.users-search').each(function () {
+    new UsersSearch(this);
   });
 });
 

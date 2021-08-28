@@ -1,28 +1,28 @@
-<h1>Log in!</h1>
+<div class="form">
+  <h2>Login!</h2>
 
-<ul>
-<% if flash.now[:errors] %>
-  <% flash.now[:errors].each do |error| %>
-    <li><%= error %></li>
+  <ul class="errors">
+  <% if flash.now[:errors] %>
+    <% flash.now[:errors].each do |error| %>
+      <li><%= error %></li>
+    <% end %>
   <% end %>
-<% end %>
-</ul>
+  </ul>
 
-<form action="/session" method="POST">
-  <input
-    type="hidden"
-    name="authenticity_token"
-    value="<%= form_authenticity_token %>">
+  <form action="/session" method="POST">
+    <input
+      type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
 
-  <label for="user_username">Username</label>
-  <input type="text" name="user[username]" id="user_username">
-  <br>
+    <label for="user_username">Username</label>
+    <input type="text" name="user[username]" id="user_username">
 
-  <label for="user_password">Password</label>
-  <input type="password" name="user[password]" id="user_password">
-  <br>
+    <label for="user_password">Password</label>
+    <input type="password" name="user[password]" id="user_password">
 
-  <input type="submit" value="Log in!">
-</form>
+    <input class="button" type="submit" value="Login!">
+  </form>
 
-<a href="<%= new_user_url %>">New User</a>
+  <p>Don't have an account? <%= link_to 'Signup!', new_user_url %>
+</div>

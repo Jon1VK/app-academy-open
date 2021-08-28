@@ -18,6 +18,17 @@ const APIUtil = {
       })
     );
   },
+
+  searchUsers(queryVal) {
+    return Promise.resolve(
+      $.ajax({
+        method: 'GET',
+        url: `/users/search`,
+        dataType: 'json',
+        data: { query: queryVal },
+      })
+    );
+  },
 };
 
 module.exports = APIUtil;

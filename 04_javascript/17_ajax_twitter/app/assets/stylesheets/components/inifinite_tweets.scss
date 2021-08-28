@@ -1,0 +1,56 @@
+.user-follow {
+  display: flex;
+  align-items: center;
+}
+
+.user-follow button {
+  margin-left: 30px;
+}
+
+.infinite-tweets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tweets {
+  font-family: $sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid $gray;
+}
+
+.tweets a {
+  color: $blue;
+}
+
+.tweets a:hover {
+  color: $dark-blue;
+}
+
+.tweets span {
+  color: $gray;
+}
+
+.tweets time {
+  float: right;
+}
+
+.tweet {
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-bottom: 1px solid $gray;
+}
+
+.tweet > a {
+  font-size: 20px;
+}
+
+.tweet > p {
+  padding: 20px;
+  font-size: 20px;
+}
+

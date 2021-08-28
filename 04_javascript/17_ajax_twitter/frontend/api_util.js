@@ -40,6 +40,17 @@ const APIUtil = {
       })
     );
   },
+
+  fetchTweets(maxCreatedAt) {
+    return Promise.resolve(
+      $.ajax({
+        method: 'GET',
+        url: '/feed',
+        dataType: 'json',
+        data: maxCreatedAt ? { max_created_at: maxCreatedAt } : {},
+      })
+    );
+  },
 };
 
 module.exports = APIUtil;

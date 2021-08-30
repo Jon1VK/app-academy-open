@@ -137,4 +137,34 @@ export default class DOMNodeCollection {
 
     return this;
   }
+
+  on(event, callback) {
+    this.elements.forEach((element) => {
+      element.addEventListener(event, callback);
+
+      const callbacks = element[`jQueryLite${event}`];
+      if (callbacks) {
+        callbacks.push(callback);
+      } else {
+        element[`jQueryLite${event}`] = [callback];
+      }
+    });
+  }
+
+  off(event, callback) {
+    this.elements.forEach((element) => {
+      const callbacks = element[`jQueryLite${event}`];
+      if (!callbacks) {
+        return;
+      }
+
+      if (callback) {
+        element.removeEventListener(event, callback);
+        callbacks.splice(callbacks.indexOf(callback), 1);
+      } else {
+        callbacks.forEach((cb) => element.removeEventListener(event, cb));
+        callbacks.splice(0, callbacks.length);
+      }
+    });
+  }
 }

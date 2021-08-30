@@ -1,6 +1,15 @@
 import DOMNodeCollection from './dom_node_collection';
 
 function jQueryLite(arg) {
+  if (typeof arg === 'function') {
+    if (document.readyState !== 'loading') {
+      arg();
+    } else {
+      document.addEventListener('DOMContentLoaded', arg);
+    }
+    return;
+  }
+
   if (typeof arg === 'string') {
     const nodes = document.querySelectorAll(arg);
     return new DOMNodeCollection([...nodes]);

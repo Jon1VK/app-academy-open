@@ -1,5 +1,6 @@
-function Router(node) {
+function Router(node, routes) {
   this.node = node;
+  this.routes = routes;
 }
 
 Router.prototype.start = function () {
@@ -9,18 +10,13 @@ Router.prototype.start = function () {
 
 Router.prototype.render = function () {
   this.node.innerHTML = '';
-
-  const route = this.activeRoute();
-
-  if (route) {
-    const p = document.createElement('p');
-    p.innerHTML = route;
-    this.node.appendChild(p);
-  }
+  const component = this.activeRoute();
+  component && this.node.appendChild(component.render());
 };
 
 Router.prototype.activeRoute = function () {
-  return window.location.hash.substring(1);
+  const hash = window.location.hash.substring(1);
+  return this.routes[hash];
 };
 
 export default Router;

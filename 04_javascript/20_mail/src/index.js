@@ -1,3 +1,4 @@
+import Compose from './compose';
 import Inbox from './inbox';
 import Router from './router';
 import Sent from './sent';
@@ -5,6 +6,7 @@ import Sent from './sent';
 const ROUTES = {
   inbox: Inbox,
   sent: Sent,
+  compose: Compose,
 };
 
 const contentNode = document.querySelector('.content');

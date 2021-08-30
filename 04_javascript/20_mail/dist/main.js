@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./inbox */ \"./src/inbox.js\");\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ \"./src/router.js\");\n\n\n\nconst ROUTES = {\n  inbox: _inbox__WEBPACK_IMPORTED_MODULE_0__.default,\n};\n\nconst contentNode = document.querySelector('.content');\nconst router = new _router__WEBPACK_IMPORTED_MODULE_1__.default(contentNode, ROUTES);\nrouter.start();\nwindow.location.hash = '#inbox';\n\nconst sidebarNav = document.querySelector('.sidebar-nav');\nsidebarNav.addEventListener('click', handleSidebarNavClick);\n\nfunction handleSidebarNavClick(event) {\n  const listItem = event.target.closest('li');\n\n  if (listItem && event.currentTarget.contains(listItem)) {\n    event.stopPropagation();\n    window.location.hash = listItem.innerText.toLowerCase();\n  }\n}\n\n\n//# sourceURL=webpack://mail/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./inbox */ \"./src/inbox.js\");\n/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ \"./src/router.js\");\n/* harmony import */ var _sent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./sent */ \"./src/sent.js\");\n\n\n\n\nconst ROUTES = {\n  inbox: _inbox__WEBPACK_IMPORTED_MODULE_0__.default,\n  sent: _sent__WEBPACK_IMPORTED_MODULE_2__.default,\n};\n\nconst contentNode = document.querySelector('.content');\nconst router = new _router__WEBPACK_IMPORTED_MODULE_1__.default(contentNode, ROUTES);\nrouter.start();\nwindow.location.hash = '#inbox';\n\nconst sidebarNav = document.querySelector('.sidebar-nav');\nsidebarNav.addEventListener('click', handleSidebarNavClick);\n\nfunction handleSidebarNavClick(event) {\n  const listItem = event.target.closest('li');\n\n  if (listItem && event.currentTarget.contains(listItem)) {\n    event.stopPropagation();\n    window.location.hash = listItem.innerText.toLowerCase();\n  }\n}\n\n\n//# sourceURL=webpack://mail/./src/index.js?");
 
 /***/ }),
 
@@ -47,6 +47,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction Router(node, routes) {\n  this.node = node;\n  this.routes = routes;\n}\n\nRouter.prototype.start = function () {\n  this.render();\n  window.addEventListener('hashchange', this.render.bind(this));\n};\n\nRouter.prototype.render = function () {\n  this.node.innerHTML = '';\n  const component = this.activeRoute();\n  component && this.node.appendChild(component.render());\n};\n\nRouter.prototype.activeRoute = function () {\n  const hash = window.location.hash.substring(1);\n  return this.routes[hash];\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Router);\n\n\n//# sourceURL=webpack://mail/./src/router.js?");
+
+/***/ }),
+
+/***/ "./src/sent.js":
+/*!*********************!*\
+  !*** ./src/sent.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _message_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./message_store */ \"./src/message_store.js\");\n\n\nconst Sent = {\n  render() {\n    const container = document.createElement('ul');\n    container.className = 'messages';\n\n    _message_store__WEBPACK_IMPORTED_MODULE_0__.default.getSentMessages().forEach((message) => {\n      container.appendChild(this.renderMessage(message));\n    });\n\n    return container;\n  },\n\n  renderMessage({ to, body, subject }) {\n    const container = document.createElement('li');\n    container.className = 'message';\n    container.innerHTML = `\n      <span class=\"to\">To: ${to}</span>\n      <span class=\"subject\">${subject}</span>\n      <span class=\"body\">${body}</span>\n    `;\n    return container;\n  },\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Sent);\n\n\n//# sourceURL=webpack://mail/./src/sent.js?");
 
 /***/ })
 

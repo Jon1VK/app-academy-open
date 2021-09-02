@@ -73,8 +73,9 @@ Tile.DELTAS = [
 ];
 
 export class Board {
-  constructor(gridSize, numBombs) {
-    this.gridSize = gridSize;
+  constructor(width, height, numBombs) {
+    this.width = width;
+    this.height = height;
     this.grid = [];
     this.numBombs = numBombs;
     this.generateBoard();
@@ -82,9 +83,9 @@ export class Board {
   }
 
   generateBoard() {
-    for (let i = 0; i < this.gridSize; i++) {
+    for (let i = 0; i < this.height; i++) {
       this.grid.push([]);
-      for (let j = 0; j < this.gridSize; j++) {
+      for (let j = 0; j < this.width; j++) {
         const tile = new Tile(this, [i, j]);
         this.grid[i].push(tile);
       }
@@ -93,18 +94,15 @@ export class Board {
 
   onBoard(pos) {
     return (
-      pos[0] >= 0 &&
-      pos[0] < this.gridSize &&
-      pos[1] >= 0 &&
-      pos[1] < this.gridSize
+      pos[0] >= 0 && pos[0] < this.height && pos[1] >= 0 && pos[1] < this.width
     );
   }
 
   plantBombs() {
     let totalPlantedBombs = 0;
     while (totalPlantedBombs < this.numBombs) {
-      const row = Math.floor(Math.random() * (this.gridSize - 1));
-      const col = Math.floor(Math.random() * (this.gridSize - 1));
+      const row = Math.floor(Math.random() * (this.height - 1));
+      const col = Math.floor(Math.random() * (this.width - 1));
 
       let tile = this.grid[row][col];
       if (!tile.bombed) {

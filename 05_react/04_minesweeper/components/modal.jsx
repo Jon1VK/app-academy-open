@@ -1,11 +1,8 @@
 import React from 'react';
 
-const Modal = ({ content, buttonText, handleButtonClick }) => (
+const Modal = ({ children }) => (
   <div className="modal">
-    <div className="modal-content">
-      <p>{content}</p>
-      <button onClick={handleButtonClick}>{buttonText}</button>
-    </div>
+    <div className="modal-content">{children}</div>
   </div>
 );
 

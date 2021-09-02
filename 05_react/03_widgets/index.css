@@ -1,0 +1,142 @@
+body,
+article,
+div,
+span,
+h2,
+p,
+time,
+ul,
+li {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  outline: 0;
+
+  font: inherit;
+  background-color: transparent;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+#root {
+  width: 575px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 16px 0 8px 0;
+}
+
+.clock-widget {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  padding: 22px 22px 2px 22px;
+  color: white;
+  background-color: orange;
+  border: 2px solid black;
+}
+
+.clock-widget > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tabs-widget {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs-widget > ul {
+  display: flex;
+}
+
+.tabs-widget li {
+  cursor: pointer;
+  flex-grow: 1;
+  background-color: lightblue;
+  padding: 5px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.tabs-widget li:hover {
+  background-color: black;
+  color: white;
+}
+
+.tabs-widget li:first-child {
+  border-left: 2px solid black;
+}
+
+.tabs-widget li:last-child {
+  border-right: 2px solid black;
+}
+
+.tabs-widget .selected {
+  font-weight: bold;
+  border-bottom: none;
+}
+
+.tabs-widget article {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  background-color: lightblue;
+  border: 2px solid black;
+  border-top: none;
+  color: white;
+  font-weight: 700;
+}
+
+.weather-widget {
+  height: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  text-align: center;
+  background-color: lightgreen;
+  border: 2px solid black;
+}
+
+.auto-widget {
+  min-height: 400px;
+  padding: 20px;
+  margin-bottom: 50px;
+  background-color: violet;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auto-widget ul {
+  list-style: square;
+  color: white;
+  font-weight: 700;
+  margin-top: 10px;
+  text-shadow: 1px 1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    -1px -1px 0 black;
+}
+
+.auto-widget li {
+  padding: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,135 @@
+h1,
+p {
+  margin: 0;
+  outline: 0;
+  border: 0;
+  padding: 0;
+
+  font: inherit;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0 20px 0;
+}
+
+p {
+  font-size: 13px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.gamestate {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tile-row {
+  display: flex;
+}
+
+.tile {
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: #ccc;
+  border: 2px outset #eee;
+  cursor: pointer;
+}
+
+.revealed,
+.flagged {
+  cursor: default;
+}
+
+.tile:hover {
+  background-color: #aaa;
+}
+
+.revealed:hover,
+.flagged:hover {
+  background-color: #ccc;
+}
+
+.tile:hover:active {
+  background-color: #888;
+}
+
+.revealed:hover:active,
+.flagged:hover:active {
+  background-color: #ccc;
+}
+
+.bombed {
+  background-color: red;
+}
+
+.revealed {
+  border: 2px inset #eee;
+}
+
+.revealed-1 {
+  color: blue;
+}
+
+.revealed-2 {
+  color: green;
+}
+
+.revealed-3 {
+  color: red;
+}
+
+.revealed-4 {
+  color: purple;
+}
+
+.revealed-5 {
+  color: black;
+}
+
+.revealed-6 {
+  color: maroon;
+}
+
+.revealed-7 {
+  color: gray;
+}
+
+.revealed-8 {
+  color: turquoise;
+}
+
+.modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid darkgray;
+  border-radius: 10px;
+}
+
+button {
+  cursor: pointer;
+}

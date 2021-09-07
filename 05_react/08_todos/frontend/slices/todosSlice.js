@@ -1,44 +1,37 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
-  1: {
-    id: 1,
-    title: 'wash car',
-    body: 'with soap',
-    done: false,
-  },
-  2: {
-    id: 2,
-    title: 'wash dog',
-    body: 'with shampoo',
-    done: true,
-  },
-};
+import * as APIUtil from '../util/todo_api_util';
+
+export const fetchTodos = createAsyncThunk(
+  'todos/fetchTodos',
+  APIUtil.fetchTodos
+);
 
 const todosSlice = createSlice({
   name: 'todos',
-  initialState,
+  initialState: {},
   reducers: {
-    receiveTodos: (state, action) => {
-      const todos = action.payload;
-      return Object.fromEntries(todos.map((todo) => [todo.id, todo]));
-    },
-
-    receiveTodo: (state, action) => {
+    receiveTodo(state, action) {
       const todo = action.payload;
       state[todo.id] = todo;
     },
 
-    removeTodo: (state, action) => {
+    removeTodo(state, action) {
       const todoId = action.payload;
       delete state[todoId];
     },
 
-    toggleTodoDone: (state, action) => {
+    toggleTodoDone(state, action) {
       const todoId = action.payload;
       const done = state[todoId].done;
       state[todoId].done = !done;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchTodos.fulfilled, (state, action) => {
+      const todos = action.payload;
+      return Object.fromEntries(todos.map((todo) => [todo.id, todo]));
+    });
   },
 });
 

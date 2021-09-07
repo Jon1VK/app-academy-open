@@ -14,6 +14,7 @@ export const TodoList = () => {
 
   return (
     <div>
+      <h1>Todos</h1>
       <ul>{renderedTodos}</ul>
       <TodoForm />
     </div>

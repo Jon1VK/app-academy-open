@@ -30,13 +30,20 @@ const todosSlice = createSlice({
     },
 
     removeTodo: (state, action) => {
-      const todo = action.payload;
-      delete state[todo.id];
+      const todoId = action.payload;
+      delete state[todoId];
+    },
+
+    toggleTodoDone: (state, action) => {
+      const todoId = action.payload;
+      const done = state[todoId].done;
+      state[todoId].done = !done;
     },
   },
 });
 
-export const { receiveTodos, receiveTodo, removeTodo } = todosSlice.actions;
+export const { receiveTodos, receiveTodo, removeTodo, toggleTodoDone } =
+  todosSlice.actions;
 
 export default todosSlice.reducer;
 

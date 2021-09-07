@@ -2,16 +2,16 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'frontend', 'todo_redux.jsx'),
-  watch: true,
+  entry: './frontend/todo_redux.jsx',
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, 'public', 'javascripts'),
     filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /.jsx?$/,
+        include: path.resolve(__dirname, 'frontend'),
         exclude: /node_modules/,
         use: [
           {

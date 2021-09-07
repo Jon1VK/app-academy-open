@@ -1,7 +1,9 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { selectStepsByTodoId } from '../../slices/stepsSlice';
 import { removeTodo, toggleTodoDone } from '../../slices/todosSlice';
+import { StepList } from '../steps/step_list';
 
 export const TodoListItem = ({ todo }) => {
   const dispatch = useDispatch();
@@ -11,13 +13,19 @@ export const TodoListItem = ({ todo }) => {
     dispatch(toggleTodoDone(todo.id));
   };
 
+  const steps = useSelector(selectStepsByTodoId(todo.id));
+
   return (
-    <li>
-      {todo.title}
-      <button onClick={onRemoveTodoClick}>Remove</button>
-      <button onClick={onToggleTodoDoneClick}>
-        {todo.done ? 'Undo' : 'Done'}
-      </button>
-    </li>
+    <details>
+      <summary>
+        {todo.title}
+        <button onClick={onToggleTodoDoneClick}>
+          {todo.done ? 'Undo' : 'Done'}
+        </button>
+        <button onClick={onRemoveTodoClick}>Remove</button>
+      </summary>
+      <p>{todo.body}</p>
+      <StepList steps={steps} todoId={todo.id} />
+    </details>
   );
 };

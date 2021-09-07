@@ -1,8 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, nanoid } from '@reduxjs/toolkit';
+
+const initialState = {
+  1: {
+    id: 1,
+    title: 'wash car',
+    body: 'with soap',
+    done: false,
+  },
+  2: {
+    id: 2,
+    title: 'wash dog',
+    body: 'with shampoo',
+    done: true,
+  },
+};
 
 const todosSlice = createSlice({
   name: 'todos',
-  initialState: {},
+  initialState,
   reducers: {
     receiveTodos: (state, action) => {
       const todos = action.payload;
@@ -24,3 +39,5 @@ const todosSlice = createSlice({
 export const { receiveTodos, receiveTodo, removeTodo } = todosSlice.actions;
 
 export default todosSlice.reducer;
+
+export const selectAllTodos = (state) => Object.values(state.todos);

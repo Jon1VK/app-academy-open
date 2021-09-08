@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { receiveTodo } from '../../slices/todosSlice';
-import { uniqueId } from '../../util/util';
+import { createTodo } from '../../slices/todosSlice';
 
 export const TodoForm = () => {
   const [title, setTitle] = useState('');
@@ -13,15 +12,9 @@ export const TodoForm = () => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
+  const onCreateTodoClick = async (e) => {
     e.preventDefault();
-    const todo = {
-      id: uniqueId(),
-      done: false,
-      title,
-      body,
-    };
-    dispatch(receiveTodo(todo));
+    dispatch(createTodo({ title, body }));
     setTitle('');
     setBody('');
   };
@@ -46,7 +39,7 @@ export const TodoForm = () => {
           value={body}
           onChange={onBodyChange}
         />
-        <button onClick={onSubmit}>Create Todo</button>
+        <button onClick={onCreateTodoClick}>Create Todo</button>
       </form>
     </section>
   );

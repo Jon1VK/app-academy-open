@@ -4,18 +4,24 @@ import * as APIUtil from '../util/todo_api_util';
 
 export const fetchTodos = createAsyncThunk(
   'todos/fetchTodos',
-  APIUtil.fetchTodos
+  async () => await APIUtil.fetchTodos()
+);
+
+export const createTodo = createAsyncThunk(
+  'todos/createTodo',
+  async (todo, { rejectWithValue }) => {
+    try {
+      return await APIUtil.createTodo(todo);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
 );
 
 const todosSlice = createSlice({
   name: 'todos',
   initialState: {},
   reducers: {
-    receiveTodo(state, action) {
-      const todo = action.payload;
-      state[todo.id] = todo;
-    },
-
     removeTodo(state, action) {
       const todoId = action.payload;
       delete state[todoId];
@@ -28,15 +34,19 @@ const todosSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchTodos.fulfilled, (state, action) => {
-      const todos = action.payload;
-      return Object.fromEntries(todos.map((todo) => [todo.id, todo]));
-    });
+    builder
+      .addCase(fetchTodos.fulfilled, (state, action) => {
+        const todos = action.payload;
+        return Object.fromEntries(todos.map((todo) => [todo.id, todo]));
+      })
+      .addCase(createTodo.fulfilled, (state, action) => {
+        const todo = action.payload;
+        state[todo.id] = todo;
+      });
   },
 });
 
-export const { receiveTodos, receiveTodo, removeTodo, toggleTodoDone } =
-  todosSlice.actions;
+export const { removeTodo, toggleTodoDone } = todosSlice.actions;
 
 export default todosSlice.reducer;
 

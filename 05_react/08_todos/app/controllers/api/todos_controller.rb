@@ -20,7 +20,7 @@ class Api::TodosController < ApplicationController
     if @todo.save
       render json: @todo, status: :created, location: api_todo_url(@todo)
     else
-      render json: @todo.errors, status: :unprocessable_entity
+      render json: @todo.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +35,7 @@ class Api::TodosController < ApplicationController
 
   # DELETE /todos/1
   def destroy
-    @todo.destroy
+    render json: @todo.destroy
   end
 
   private

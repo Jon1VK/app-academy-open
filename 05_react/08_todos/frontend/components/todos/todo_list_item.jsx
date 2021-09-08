@@ -2,15 +2,15 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectStepsByTodoId } from '../../slices/stepsSlice';
-import { removeTodo, toggleTodoDone } from '../../slices/todosSlice';
+import { deleteTodo, toggleTodoDone } from '../../slices/todosSlice';
 import { StepList } from '../steps/step_list';
 
 export const TodoListItem = ({ todo }) => {
   const dispatch = useDispatch();
 
-  const onRemoveTodoClick = () => dispatch(removeTodo(todo.id));
+  const onDeleteTodoClick = () => dispatch(deleteTodo(todo));
   const onToggleTodoDoneClick = () => {
-    dispatch(toggleTodoDone(todo.id));
+    dispatch(toggleTodoDone(todo));
   };
 
   const steps = useSelector(selectStepsByTodoId(todo.id));
@@ -22,7 +22,7 @@ export const TodoListItem = ({ todo }) => {
         <button onClick={onToggleTodoDoneClick}>
           {todo.done ? 'Undo' : 'Done'}
         </button>
-        <button onClick={onRemoveTodoClick}>Remove</button>
+        <button onClick={onDeleteTodoClick}>Delete</button>
       </summary>
       <p>{todo.body}</p>
       <StepList steps={steps} todoId={todo.id} />

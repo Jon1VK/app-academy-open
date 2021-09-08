@@ -12,27 +12,25 @@ export const createTodo = createAsyncThunk(
   async (todo, { rejectWithValue }) => {
     try {
       return await APIUtil.createTodo(todo);
-    } catch (error) {
-      return rejectWithValue(error);
+    } catch (errors) {
+      return rejectWithValue(errors);
     }
   }
+);
+
+export const toggleTodoDone = createAsyncThunk(
+  'todos/toggleTodoDone',
+  async (todo) => await APIUtil.toggleTodoDone(todo)
+);
+
+export const deleteTodo = createAsyncThunk(
+  'todos/deleteTodo',
+  async (todo) => await APIUtil.deleteTodo(todo)
 );
 
 const todosSlice = createSlice({
   name: 'todos',
   initialState: {},
-  reducers: {
-    removeTodo(state, action) {
-      const todoId = action.payload;
-      delete state[todoId];
-    },
-
-    toggleTodoDone(state, action) {
-      const todoId = action.payload;
-      const done = state[todoId].done;
-      state[todoId].done = !done;
-    },
-  },
   extraReducers(builder) {
     builder
       .addCase(fetchTodos.fulfilled, (state, action) => {
@@ -42,11 +40,17 @@ const todosSlice = createSlice({
       .addCase(createTodo.fulfilled, (state, action) => {
         const todo = action.payload;
         state[todo.id] = todo;
+      })
+      .addCase(toggleTodoDone.fulfilled, (state, action) => {
+        const todo = action.payload;
+        state[todo.id] = todo;
+      })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        const todo = action.payload;
+        delete state[todo.id];
       });
   },
 });
-
-export const { removeTodo, toggleTodoDone } = todosSlice.actions;
 
 export default todosSlice.reducer;
 

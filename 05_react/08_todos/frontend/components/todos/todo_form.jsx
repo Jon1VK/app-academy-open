@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  clearErrors,
+  receiveErrors,
+  selectAllErrors,
+} from '../../slices/errorsSlice';
 
 import { createTodo } from '../../slices/todosSlice';
 
@@ -13,15 +18,24 @@ export const TodoForm = () => {
   const dispatch = useDispatch();
 
   const onCreateTodoClick = async (e) => {
-    e.preventDefault();
-    dispatch(createTodo({ title, body }));
-    setTitle('');
-    setBody('');
+    try {
+      e.preventDefault();
+      await dispatch(createTodo({ title, body })).unwrap();
+      dispatch(clearErrors());
+      setTitle('');
+      setBody('');
+    } catch (errors) {
+      dispatch(receiveErrors(errors));
+    }
   };
+
+  const errors = useSelector(selectAllErrors);
+  const renderedErrors = errors.map((error) => <li key={error}>{error}</li>);
 
   return (
     <section>
       <h2>New Todo</h2>
+      {errors.length > 0 && <ul>{renderedErrors}</ul>}
       <form>
         <label htmlFor="todoTitle">Todo Title:</label>
         <input

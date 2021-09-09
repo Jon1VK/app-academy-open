@@ -1,18 +1,25 @@
 # == Schema Information
 #
-# Table name: todos
+# Table name: steps
 #
 #  id         :bigint           not null, primary key
-#  body       :text             not null
 #  done       :boolean          default(FALSE)
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  todo_id    :bigint           not null
 #
-class Todo < ApplicationRecord
-  has_many :steps
+# Indexes
+#
+#  index_steps_on_todo_id  (todo_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (todo_id => todos.id)
+#
+class Step < ApplicationRecord
+  belongs_to :todo
 
-  validates :body, presence: true
   validates :done, inclusion: { in: [true, false] }
   validates :title, presence: true
 end

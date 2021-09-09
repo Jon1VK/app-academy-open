@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { receiveStep } from '../../slices/stepsSlice';
-import { uniqueId } from '../../util/util';
+import { createStep } from '../../slices/stepsSlice';
 
 export const StepForm = ({ todoId }) => {
   const [title, setTitle] = useState('');
@@ -11,15 +10,9 @@ export const StepForm = ({ todoId }) => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = (e) => {
+  const onCreateStepClick = async (e) => {
     e.preventDefault();
-    const step = {
-      id: uniqueId(),
-      todo_id: todoId,
-      done: false,
-      title,
-    };
-    dispatch(receiveStep(step));
+    await dispatch(createStep({ title, todo_id: todoId }));
     setTitle('');
   };
 
@@ -34,7 +27,7 @@ export const StepForm = ({ todoId }) => {
           value={title}
           onChange={onTitleChange}
         />
-        <button onClick={onSubmit}>Create Step</button>
+        <button onClick={onCreateStepClick}>Create Step</button>
       </form>
     </section>
   );

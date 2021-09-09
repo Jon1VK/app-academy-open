@@ -1,14 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { removeStep, toggleStepDone } from '../../slices/stepsSlice';
+import { deleteStep, toggleStepDone } from '../../slices/stepsSlice';
 
 export const StepListItem = ({ step }) => {
   const dispatch = useDispatch();
 
-  const onRemoveStepClick = () => dispatch(removeStep(step.id));
+  const onRemoveStepClick = () => dispatch(deleteStep(step));
   const onToggleStepDoneClick = () => {
-    dispatch(toggleStepDone(step.id));
+    dispatch(toggleStepDone(step));
   };
 
   return (

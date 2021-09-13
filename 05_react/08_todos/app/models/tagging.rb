@@ -21,4 +21,6 @@
 class Tagging < ApplicationRecord
   belongs_to :todo
   belongs_to :tag
+
+  validates :tag, uniqueness: { scope: :todo }
 end

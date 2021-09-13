@@ -6,12 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Todo.destroy_all
+User.destroy_all
 Tag.destroy_all
 
-8.times do
-  todo = FactoryBot.create(:todo)
-  4.times do
-    FactoryBot.create(:step, todo: todo)
+2.times do
+  user = FactoryBot.create(:user)
+  6.times do
+    todo = FactoryBot.create(:todo, user: user)
+    3.times do
+      FactoryBot.create(:step, todo: todo)
+    end
   end
 end
+

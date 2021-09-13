@@ -8,6 +8,7 @@
   <title>Todos App</title>
 </head>
 <body>
+  <p>Logged in as: <%= current_user.username %></p>
   <form action="/session" method="POST">
     <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Log Out">

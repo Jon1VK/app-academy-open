@@ -1,9 +1,9 @@
-class Api::TodosController < ApplicationController
+class Api::TodosController < Api::ApiController
   before_action :set_todo, only: [:show, :update, :destroy]
 
   # GET /todos
   def index
-    @todos = Todo.all
+    @todos = current_user.todos
 
     render json: @todos, include: :tags
   end
@@ -15,7 +15,7 @@ class Api::TodosController < ApplicationController
 
   # POST /todos
   def create
-    @todo = Todo.new(todo_params)
+    @todo = current_user.todos.new(todo_params)
 
     if @todo.save
       render json: @todo, include: :tags, status: :created, location: api_todo_url(@todo)
@@ -41,7 +41,7 @@ class Api::TodosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_todo
-      @todo = Todo.find(params[:id])
+      @todo = current_user.todos.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

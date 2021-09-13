@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-  include ActionView::Layouts
-  
   def new
     render :new
   end

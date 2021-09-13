@@ -1,4 +1,4 @@
-class Api::StepsController < ApplicationController
+class Api::StepsController < Api::ApiController
   before_action :set_step, only: [:show, :update, :destroy]
 
   # GET /steps

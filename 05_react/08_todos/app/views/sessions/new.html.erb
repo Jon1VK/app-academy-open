@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>Log In</h1>
-  <%= form_with(model: User.new, url: '/session') do |form| %>
+  <%= form_with(model: User.new, url: session_url) do |form| %>
     <div>
       <%= form.label :username %>
       <%= form.text_field :username %>
@@ -21,5 +21,6 @@
       <%= form.submit 'Log In' %>
     </div>
   <% end %>
+  <%= link_to "Sign up page", signup_url %>
 </body>
 </html>

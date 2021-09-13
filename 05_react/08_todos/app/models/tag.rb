@@ -12,8 +12,8 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 class Tag < ApplicationRecord
-  has_many :taggings
-  has_many :tags, through: :taggings
+  has_many :taggings, dependent: :delete_all
+  has_many :todos, through: :taggings
 
-  validates :name, presence: true, uniqueness: true  
+  validates :name, presence: true, uniqueness: true
 end

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todos App</title>
+</head>
+<body>
+  <h1>Log In</h1>
+  <%= form_with(model: User.new, url: '/session') do |form| %>
+    <div>
+      <%= form.label :username %>
+      <%= form.text_field :username %>
+    </div>
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+    <div>
+      <%= form.submit 'Log In' %>
+    </div>
+  <% end %>
+</body>
+</html>

@@ -8,6 +8,10 @@
   <title>Todos App</title>
 </head>
 <body>
+  <form action="/session" method="POST">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Log Out">
+  </form>
   <div id="root"></div>
 </body>
 </html>

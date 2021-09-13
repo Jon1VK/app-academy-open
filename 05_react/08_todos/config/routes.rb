@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root to: 'static_pages#index'
+  get 'signup', to: 'users#new'
+  get 'login', to: 'sessions#new'
+
+  resources :users, only: [:create]
+  resource :session, only: [:create, :destroy]
 
   namespace :api do
     resources :todos

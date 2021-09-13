@@ -6,24 +6,47 @@ import {
   selectAllErrors,
 } from '../../slices/errorsSlice';
 
-import { createTodo } from '../../slices/todosSlice';
+import todosSlice, { createTodo } from '../../slices/todosSlice';
 
 export const TodoForm = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [tagName, setTagName] = useState('');
+  const [tagNames, setTagNames] = useState([]);
 
   const onTitleChange = (e) => setTitle(e.target.value);
   const onBodyChange = (e) => setBody(e.target.value);
+  const onTagNameChange = (e) => setTagName(e.target.value);
+
+  const onAddTagClick = (e) => {
+    setTagNames((tagNames) => {
+      if (tagNames.includes(tagName)) {
+        return tagNames;
+      } else {
+        return [...tagNames, tagName];
+      }
+    });
+    setTagName('');
+  };
+
+  const onRemoveTagClick = (e) => {
+    const tagNameToRemove = e.target.dataset.tagName;
+    setTagNames((tagNames) =>
+      tagNames.filter((tagName) => tagName !== tagNameToRemove)
+    );
+  };
 
   const dispatch = useDispatch();
 
   const onCreateTodoClick = async (e) => {
     try {
       e.preventDefault();
-      await dispatch(createTodo({ title, body })).unwrap();
+      await dispatch(createTodo({ title, body, tag_names: tagNames })).unwrap();
       dispatch(clearErrors());
       setTitle('');
       setBody('');
+      setTagName('');
+      setTagNames([]);
     } catch (errors) {
       dispatch(receiveErrors(errors));
     }
@@ -53,6 +76,32 @@ export const TodoForm = () => {
           value={body}
           onChange={onBodyChange}
         />
+        <label htmlFor="todoTags">Tags:</label>
+        <input
+          type="text"
+          id="todoTags"
+          name="todoTags"
+          placeholder="Input a tag"
+          value={tagName}
+          onChange={onTagNameChange}
+        />
+        <button type="button" onClick={onAddTagClick}>
+          Add a tag
+        </button>
+        <ul>
+          {tagNames.map((tagName) => (
+            <li key={tagName}>
+              {tagName}
+              <button
+                onClick={onRemoveTagClick}
+                data-tag-name={tagName}
+                type="button"
+              >
+                Remove tag
+              </button>
+            </li>
+          ))}
+        </ul>
         <button onClick={onCreateTodoClick}>Create Todo</button>
       </form>
     </section>

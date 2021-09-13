@@ -24,6 +24,12 @@ export const TodoListItem = ({ todo }) => {
         </button>
         <button onClick={onDeleteTodoClick}>Delete</button>
       </summary>
+      <p>Tags</p>
+      <ul>
+        {todo.tags.map((tag) => (
+          <li key={tag.name}>{tag.name}</li>
+        ))}
+      </ul>
       <p>{todo.body}</p>
       <StepList steps={steps} todoId={todo.id} />
     </details>

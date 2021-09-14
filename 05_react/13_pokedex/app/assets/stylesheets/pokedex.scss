@@ -1,28 +1,36 @@
-@import "variables";
+@import 'variables';
 
 .pokedex {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: space-around;
   padding: 0;
   height: 100%;
   background-color: white;
 
-  > ul {
+  > .pokemon-index {
     width: 300px;
     height: 100%;
     box-sizing: border-box;
-    overflow: scroll;
+    overflow: hidden;
+    scrollbar-width: 0;
     border: 6px solid black;
     border-radius: 20px;
     margin-left: 40px;
 
-    > li {
-      a {
-        display: block;
-      }
+    > ul {
+      width: calc(100% + 20px);
+      height: 100%;
+      overflow-y: scroll;
 
-      &:active {
-        background-color: $red;
+      > li {
+        a {
+          display: block;
+        }
+
+        &:active {
+          background-color: $red;
+        }
       }
     }
   }

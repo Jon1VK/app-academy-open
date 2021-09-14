@@ -1,3 +1,13 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
-export default () => <h1>Hello Pokedex App!</h1>;
+import PokemonIndex from '../features/pokemon/pokemon_index';
+import store from './store';
+
+export default () => (
+  <Provider store={store}>
+    <div className="pokedex">
+      <PokemonIndex />
+    </div>
+  </Provider>
+);

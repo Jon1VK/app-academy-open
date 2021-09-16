@@ -13,16 +13,23 @@ export const fetchAllPokemon = createAsyncThunk(
   async () => await APIUtil.fetchAllPokemon()
 );
 
+export const fetchPokemon = createAsyncThunk(
+  'pokemon/fetchPokemon',
+  async (id) => await APIUtil.fetchPokemon(id)
+);
+
 const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: pokemonAdapter.getInitialState(),
   extraReducers: (builder) => {
     builder.addCase(fetchAllPokemon.fulfilled, pokemonAdapter.setAll);
+    builder.addCase(fetchPokemon.fulfilled, (state, action) => {
+      pokemonAdapter.upsertOne(state, action.payload.pokemon);
+    });
   },
 });
 
 export default pokemonSlice.reducer;
 
-export const { selectAll: selectAllPokemon } = pokemonAdapter.getSelectors(
-  (state) => state.pokemon
-);
+export const { selectAll: selectAllPokemon, selectById: selectPokemonById } =
+  pokemonAdapter.getSelectors((state) => state.pokemon);

@@ -8,7 +8,7 @@ class Api::PokemonController < ApplicationController
   # GET /api/pokemon/1
   # GET /api/pokemon/1.json
   def show
-    @pokemon = Pokemon.find(params[:id])
+    @pokemon = Pokemon.includes(:moves, :items).find(params[:id])
   end
 
   # POST /api/pokemon

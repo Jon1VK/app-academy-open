@@ -8,13 +8,13 @@ const itemsSlice = createSlice({
   initialState: itemsAdapter.getInitialState(),
   extraReducers: (builder) => {
     builder.addCase(fetchPokemon.fulfilled, (state, action) => {
-      itemsAdapter.addMany(state, action.payload.items);
+      itemsAdapter.setAll(state, action.payload.items);
     });
   },
 });
 
 export default itemsSlice.reducer;
 
-export const { selectById: selectItemById } = itemsAdapter.getSelectors(
+export const { selectAll: selectAllItems } = itemsAdapter.getSelectors(
   (state) => state.items
 );

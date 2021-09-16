@@ -1,4 +1,8 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
+import {
+  createEntityAdapter,
+  createSlice,
+  createSelector,
+} from '@reduxjs/toolkit';
 import { fetchPokemon } from '../pokemon/pokemon_slice';
 
 const movesAdapter = createEntityAdapter();
@@ -8,13 +12,17 @@ const movesSlice = createSlice({
   initialState: movesAdapter.getInitialState(),
   extraReducers: (builder) => {
     builder.addCase(fetchPokemon.fulfilled, (state, action) => {
-      movesAdapter.addMany(state, action.payload.moves);
+      movesAdapter.setAll(state, action.payload.moves);
     });
   },
 });
 
 export default movesSlice.reducer;
 
-export const { selectById: selectMoveById } = movesAdapter.getSelectors(
+export const { selectAll: selectAllMoves } = movesAdapter.getSelectors(
   (state) => state.moves
+);
+
+export const selectMoveNames = createSelector(selectAllMoves, (moves) =>
+  moves.map((move) => move.name)
 );

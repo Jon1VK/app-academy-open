@@ -6,7 +6,9 @@ import {
 
 import * as APIUtil from '../../util/api_util';
 
-const pokemonAdapter = createEntityAdapter();
+const pokemonAdapter = createEntityAdapter({
+  sortComparer: (a, b) => a.id - b.id,
+});
 
 export const fetchAllPokemon = createAsyncThunk(
   'pokemon/fetchAllPokemon',
@@ -22,7 +24,7 @@ const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: pokemonAdapter.getInitialState(),
   extraReducers: (builder) => {
-    builder.addCase(fetchAllPokemon.fulfilled, pokemonAdapter.setAll);
+    builder.addCase(fetchAllPokemon.fulfilled, pokemonAdapter.addMany);
     builder.addCase(fetchPokemon.fulfilled, (state, action) => {
       pokemonAdapter.upsertOne(state, action.payload.pokemon);
     });

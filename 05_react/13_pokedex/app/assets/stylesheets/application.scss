@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
-@import "variables";
+@import 'variables';
 
 html {
   height: 100%;
@@ -47,6 +47,7 @@ header {
 
 h2 {
   font-size: 32px;
+  color: $black;
 }
 
 h3 {

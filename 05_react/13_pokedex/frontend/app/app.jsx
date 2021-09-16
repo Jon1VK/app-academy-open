@@ -1,13 +1,10 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Route } from 'react-router-dom';
 
 import PokemonIndex from '../features/pokemon/pokemon_index';
-import store from './store';
 
 export default () => (
-  <Provider store={store}>
-    <div className="pokedex">
-      <PokemonIndex />
-    </div>
-  </Provider>
+  <div className="pokedex">
+    <Route path="/" component={PokemonIndex} />
+  </div>
 );

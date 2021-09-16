@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import PokemonIndexItem from './pokemon_index_item';
 import { fetchAllPokemon, selectAllPokemon } from './pokemon_slice';
 
 const PokemonIndex = () => {
@@ -13,10 +14,7 @@ const PokemonIndex = () => {
   }, [dispatch]);
 
   const renderedPokemon = pokemon.map((pokemon) => (
-    <li key={pokemon.id} className="pokemon-index-item">
-      <img src={pokemon.imageUrl} alt={pokemon.name} />
-      {pokemon.name}
-    </li>
+    <PokemonIndexItem key={pokemon.id} pokemon={pokemon} />
   ));
 
   return (

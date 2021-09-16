@@ -267,6 +267,7 @@
       &:hover {
         box-shadow: 1px 1px 5px black;
         -webkit-filter: sepia(50%);
+        filter: sepia(50%);
       }
     }
   }

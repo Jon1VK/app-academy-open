@@ -1,13 +1,22 @@
 json.pokemon @pokemon, partial: 'pokemon', as: :pokemon
 
-json.moves do
-  @pokemon.moves.each do |move|
-    json.partial! move
+if @pokemon.moves.empty?
+  json.set! :moves, {}
+else
+  json.moves do
+    @pokemon.moves.each do |move|
+      json.partial! move
+    end
   end
 end
 
-json.items do
-  @pokemon.items.each do |item|
-    json.partial! item
+if @pokemon.items.empty?
+  json.set! :items, {}
+else
+  json.items do
+    @pokemon.items.each do |item|
+      json.partial! item
+    end
   end
 end
+

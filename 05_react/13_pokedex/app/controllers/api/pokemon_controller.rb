@@ -17,7 +17,7 @@ class Api::PokemonController < ApplicationController
     @pokemon = Pokemon.new(pokemon_params)
 
     if @pokemon.save
-      render :show, status: :created, location: @pokemon
+      render :show, status: :created, location: api_pokemon_url(@pokemon)
     else
       render json: @pokemon.errors, status: :unprocessable_entity
     end

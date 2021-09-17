@@ -20,6 +20,11 @@ export const fetchPokemon = createAsyncThunk(
   async (id) => await APIUtil.fetchPokemon(id)
 );
 
+export const createPokemon = createAsyncThunk(
+  'pokemon/createPokemon',
+  async (pokemon) => await APIUtil.createPokemon(pokemon)
+);
+
 const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: pokemonAdapter.getInitialState(),
@@ -28,6 +33,7 @@ const pokemonSlice = createSlice({
     builder.addCase(fetchPokemon.fulfilled, (state, action) => {
       pokemonAdapter.upsertOne(state, action.payload.pokemon);
     });
+    builder.addCase(createPokemon.fulfilled, pokemonAdapter.addOne);
   },
 });
 

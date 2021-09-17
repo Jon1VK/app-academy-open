@@ -164,9 +164,18 @@
     display: flex;
     flex-direction: column;
 
-    button {
-      margin-bottom: 20px;
+    li {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin-top: 5px;
+      }
+    }
+
+    > button {
       background: $grey;
+      margin-bottom: 20px;
     }
   }
 }

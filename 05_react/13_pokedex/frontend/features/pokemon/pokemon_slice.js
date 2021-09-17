@@ -33,6 +33,19 @@ export const createPokemon = createAsyncThunk(
   }
 );
 
+export const editPokemon = createAsyncThunk(
+  'pokemon/editPokemon',
+  async (pokemon, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const response = await APIUtil.editPokemon(pokemon);
+      return fulfillWithValue(response);
+    } catch (rejected) {
+      const errors = await rejected;
+      return rejectWithValue(errors);
+    }
+  }
+);
+
 const pokemonSlice = createSlice({
   name: 'pokemon',
   initialState: pokemonAdapter.getInitialState(),
@@ -44,6 +57,9 @@ const pokemonSlice = createSlice({
       })
       .addCase(createPokemon.fulfilled, (state, action) => {
         pokemonAdapter.addOne(state, action.payload.pokemon);
+      })
+      .addCase(editPokemon.fulfilled, (state, action) => {
+        pokemonAdapter.upsertOne(state, action.payload.pokemon);
       });
   },
 });

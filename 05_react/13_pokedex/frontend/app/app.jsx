@@ -8,6 +8,7 @@ import { fetchAllPokemon } from '../features/pokemon/pokemon_slice';
 import PokemonDetail from '../features/pokemon/pokemon_detail';
 import PokemonIndex from '../features/pokemon/pokemon_index';
 import PokemonForm from '../features/pokemon/pokemon_form';
+import PokemonEditForm from '../features/pokemon/pokemon_edit_form';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const App = () => {
   return (
     <div className="pokedex">
       <Switch>
+        <Route path="/pokemon/:id/edit" component={PokemonEditForm} />
         <Route path="/pokemon/:id" component={PokemonDetail} />
         <Route path="/" component={PokemonForm} />
       </Switch>

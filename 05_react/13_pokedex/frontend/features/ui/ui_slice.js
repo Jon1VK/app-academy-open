@@ -3,6 +3,7 @@ import {
   fetchAllPokemon,
   fetchPokemon,
   createPokemon,
+  editPokemon,
 } from '../pokemon/pokemon_slice';
 
 const initialState = {
@@ -36,6 +37,12 @@ const uiSlice = createSlice({
         state.errors = [];
       })
       .addCase(createPokemon.rejected, (state, action) => {
+        state.errors = action.payload;
+      })
+      .addCase(editPokemon.fulfilled, (state) => {
+        state.errors = [];
+      })
+      .addCase(editPokemon.rejected, (state, action) => {
         state.errors = action.payload;
       });
   },

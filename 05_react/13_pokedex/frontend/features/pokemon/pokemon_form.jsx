@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createPokemon } from './pokemon_slice';
+import { createPokemon, editPokemon } from './pokemon_slice';
 import { selectErrors } from '../ui/ui_slice';
 
-const PokemonForm = () => {
+const PokemonForm = ({
+  pokemon = { name: '', image_url: '', poke_type: '', attack: '', defense: '' },
+  initialMoves = [],
+}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const errors = useSelector(selectErrors);
-  const [name, setName] = useState('');
-  const [image_url, setImageUrl] = useState('');
-  const [poke_type, setPokeType] = useState('');
-  const [attack, setAttack] = useState('');
-  const [defense, setDefense] = useState('');
+  const [name, setName] = useState(pokemon.name);
+  const [image_url, setImageUrl] = useState(pokemon.imageUrl);
+  const [poke_type, setPokeType] = useState(pokemon.pokeType);
+  const [attack, setAttack] = useState(pokemon.attack);
+  const [defense, setDefense] = useState(pokemon.defense);
   const [move, setMove] = useState('');
-  const [moves, setMoves] = useState([]);
+  const [moves, setMoves] = useState(initialMoves);
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleImageUrlChange = (e) => setImageUrl(e.target.value);
@@ -30,8 +33,13 @@ const PokemonForm = () => {
     setMove('');
   };
 
-  const handleCreatePokemonClick = () => {
-    const pokemon = {
+  const removeMove = (moveToRemove) => {
+    setMoves((moves) => moves.filter((move) => move !== moveToRemove));
+  };
+
+  const handleSubmit = () => {
+    const poke = {
+      id: pokemon.id,
       name,
       image_url,
       poke_type,
@@ -40,12 +48,21 @@ const PokemonForm = () => {
       moves,
     };
 
-    dispatch(createPokemon(pokemon))
-      .unwrap()
-      .then(({ pokemon }) => {
-        history.push(`/pokemon/${pokemon.id}`);
-      })
-      .catch((error) => console.log(error));
+    if (poke.id) {
+      dispatch(editPokemon(poke))
+        .unwrap()
+        .then(({ pokemon }) => {
+          history.push(`/pokemon/${pokemon.id}`);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      dispatch(createPokemon(poke))
+        .unwrap()
+        .then(({ pokemon }) => {
+          history.push(`/pokemon/${pokemon.id}`);
+        })
+        .catch((error) => console.log(error));
+    }
   };
 
   const renderedPokemonTypes = window.POKEMON_TYPES.map((pokeType) => (
@@ -57,6 +74,12 @@ const PokemonForm = () => {
   const renderedErrors = errors.map((error, idx) => (
     <li key={idx} className="error">
       {error}
+    </li>
+  ));
+
+  const renderedMoves = moves.map((move) => (
+    <li key={move} onClick={() => removeMove(move)}>
+      {move}
     </li>
   ));
 
@@ -98,7 +121,8 @@ const PokemonForm = () => {
           placeholder="Defense"
         />
         <div className="pokemon-moves-form-container">
-          <span>Moves: {moves.join(', ')}</span>
+          <h3>Moves:</h3>
+          <ul>{renderedMoves}</ul>
           <input
             type="text"
             value={move}
@@ -107,7 +131,9 @@ const PokemonForm = () => {
           />
           <button onClick={handleAddMoveClick}>Add Move</button>
         </div>
-        <button onClick={handleCreatePokemonClick}>Create Pokemon</button>
+        <button onClick={handleSubmit}>
+          {pokemon.id ? 'Edit Pokemon' : 'Create Pokemon'}
+        </button>
       </div>
     </div>
   );

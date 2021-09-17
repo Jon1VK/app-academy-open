@@ -3,7 +3,11 @@ import {
   createSlice,
   createSelector,
 } from '@reduxjs/toolkit';
-import { fetchPokemon, createPokemon } from '../pokemon/pokemon_slice';
+import {
+  fetchPokemon,
+  createPokemon,
+  editPokemon,
+} from '../pokemon/pokemon_slice';
 
 const movesAdapter = createEntityAdapter();
 
@@ -16,6 +20,9 @@ const movesSlice = createSlice({
         movesAdapter.setAll(state, action.payload.moves);
       })
       .addCase(createPokemon.fulfilled, (state, action) => {
+        movesAdapter.setAll(state, action.payload.moves);
+      })
+      .addCase(editPokemon.fulfilled, (state, action) => {
         movesAdapter.setAll(state, action.payload.moves);
       });
   },

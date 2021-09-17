@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Route, useRouteMatch } from 'react-router-dom';
+import { Route, useRouteMatch, Link } from 'react-router-dom';
 
 import { selectAllItems } from '../items/items_slice';
 import { selectMoveNames } from '../moves/moves_slice';
@@ -45,6 +45,7 @@ const PokemonDetail = () => {
       <ul>
         <li>
           <h2>{pokemon.name}</h2>
+          <Link to={`${url}/edit`}>Edit</Link>
         </li>
         <li>Type: {pokemon.pokeType}</li>
         <li>Attack: {pokemon.attack}</li>

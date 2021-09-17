@@ -18,7 +18,11 @@ const App = () => {
   const loading = useSelector(selectFetchingAllPokemon);
 
   if (loading == null || loading) {
-    return <div>Loading!</div>;
+    return (
+      <div id="loading-pokeball-container">
+        <div id="loading-pokeball"></div>
+      </div>
+    );
   }
 
   return (

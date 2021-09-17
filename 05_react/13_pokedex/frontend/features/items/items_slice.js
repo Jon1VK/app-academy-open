@@ -15,6 +15,5 @@ const itemsSlice = createSlice({
 
 export default itemsSlice.reducer;
 
-export const { selectAll: selectAllItems } = itemsAdapter.getSelectors(
-  (state) => state.items
-);
+export const { selectAll: selectAllItems, selectById: selectItemById } =
+  itemsAdapter.getSelectors((state) => state.items);

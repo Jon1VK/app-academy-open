@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 
 import { selectFetchingAllPokemon } from '../features/ui/ui_slice';
 import { fetchAllPokemon } from '../features/pokemon/pokemon_slice';
 import PokemonDetail from '../features/pokemon/pokemon_detail';
 import PokemonIndex from '../features/pokemon/pokemon_index';
+import PokemonForm from '../features/pokemon/pokemon_form';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,10 @@ const App = () => {
 
   return (
     <div className="pokedex">
-      <Route path="/pokemon/:id" component={PokemonDetail} />
+      <Switch>
+        <Route path="/pokemon/:id" component={PokemonDetail} />
+        <Route path="/" component={PokemonForm} />
+      </Switch>
       <Route path="/" component={PokemonIndex} />
     </div>
   );

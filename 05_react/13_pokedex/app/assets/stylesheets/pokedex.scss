@@ -132,7 +132,7 @@
   padding: 20px;
   background-color: white;
   border-radius: 10px;
-  overflow: scroll;
+  overflow: auto;
 
   input,
   select,
@@ -158,6 +158,16 @@
 
   select {
     cursor: pointer;
+  }
+
+  .pokemon-moves-form-container {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin-bottom: 20px;
+      background: $grey;
+    }
   }
 }
 

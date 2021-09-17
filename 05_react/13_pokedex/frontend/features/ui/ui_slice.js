@@ -1,8 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAllPokemon, fetchPokemon } from '../pokemon/pokemon_slice';
+import {
+  fetchAllPokemon,
+  fetchPokemon,
+  createPokemon,
+} from '../pokemon/pokemon_slice';
 
 const initialState = {
   loading: {},
+  errors: [],
 };
 
 const uiSlice = createSlice({
@@ -26,6 +31,12 @@ const uiSlice = createSlice({
       })
       .addCase(fetchPokemon.fulfilled, (state) => {
         state.loading.fetchingPokemon = false;
+      })
+      .addCase(createPokemon.fulfilled, (state) => {
+        state.errors = [];
+      })
+      .addCase(createPokemon.rejected, (state, action) => {
+        state.errors = action.payload;
       });
   },
 });
@@ -37,3 +48,5 @@ export const selectFetchingAllPokemon = (state) =>
 
 export const selectFetchingPokemon = (state) =>
   state.ui.loading.fetchingPokemon;
+
+export const selectErrors = (state) => state.ui.errors;

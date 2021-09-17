@@ -1,5 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-import { fetchPokemon } from '../pokemon/pokemon_slice';
+import { fetchPokemon, createPokemon } from '../pokemon/pokemon_slice';
 
 const itemsAdapter = createEntityAdapter();
 
@@ -7,9 +7,13 @@ const itemsSlice = createSlice({
   name: 'items',
   initialState: itemsAdapter.getInitialState(),
   extraReducers: (builder) => {
-    builder.addCase(fetchPokemon.fulfilled, (state, action) => {
-      itemsAdapter.setAll(state, action.payload.items);
-    });
+    builder
+      .addCase(fetchPokemon.fulfilled, (state, action) => {
+        itemsAdapter.setAll(state, action.payload.items);
+      })
+      .addCase(createPokemon.fulfilled, (state, action) => {
+        itemsAdapter.setAll(state, action.payload.items);
+      });
   },
 });
 

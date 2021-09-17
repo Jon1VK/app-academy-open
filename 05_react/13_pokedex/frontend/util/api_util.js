@@ -11,7 +11,6 @@ export const fetchPokemon = async (id) => {
 };
 
 export const createPokemon = async (pokemon) => {
-  console.log(pokemon);
   await new Promise((resolve) => setTimeout(resolve, 1000));
   const response = await fetch('api/pokemon', {
     method: 'POST',
@@ -25,7 +24,7 @@ export const createPokemon = async (pokemon) => {
   });
 
   if (!response.ok) {
-    throw new Error(response.json());
+    throw response.json();
   }
 
   return response.json();

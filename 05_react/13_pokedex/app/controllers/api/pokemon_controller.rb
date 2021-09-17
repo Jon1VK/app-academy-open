@@ -15,11 +15,14 @@ class Api::PokemonController < ApplicationController
   # POST /api/pokemon.json
   def create
     @pokemon = Pokemon.new(pokemon_params)
+    @pokemon.moves = params[:pokemon][:moves].map do |move|
+      Move.find_or_initialize_by(name: move)
+    end
 
     if @pokemon.save
       render :show, status: :created, location: api_pokemon_url(@pokemon)
     else
-      render json: @pokemon.errors, status: :unprocessable_entity
+      render json: @pokemon.errors.full_messages, status: :unprocessable_entity
     end
   end
 

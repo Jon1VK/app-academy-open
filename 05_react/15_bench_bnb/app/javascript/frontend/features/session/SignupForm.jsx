@@ -13,7 +13,9 @@ const SignupForm = () => {
         submitText="Sign Up"
         onSubmit={(user) => dispatch(signup(user)).unwrap()}
       />
-      <Link to="/login">Already have an account? Log In!</Link>
+      <Link className="btn btn-link px-0" to="/login">
+        Already have an account? Log In!
+      </Link>
     </div>
   );
 };

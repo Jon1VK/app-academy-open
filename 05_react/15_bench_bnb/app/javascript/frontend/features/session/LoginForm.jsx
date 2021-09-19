@@ -13,7 +13,9 @@ const LoginForm = () => {
         submitText="Log In"
         onSubmit={(user) => dispatch(login(user)).unwrap()}
       />
-      <Link to="/signup">No account yet? Sign Up!</Link>
+      <Link className="btn btn-link px-0" to="/signup">
+        No account yet? Sign Up!
+      </Link>
     </div>
   );
 };

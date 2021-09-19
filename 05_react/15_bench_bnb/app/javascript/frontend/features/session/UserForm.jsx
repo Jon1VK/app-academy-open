@@ -29,23 +29,35 @@ const UserForm = ({ submitText, onSubmit }) => {
     <div>
       <FormErrors errors={errors['auth']} />
       <form onSubmit={handleSubmit}>
-        <FormErrors errors={errors['username']} />
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={user.username}
-          onChange={handleChange('username')}
-        />
-        <FormErrors errors={errors['password']} />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={handleChange('password')}
-        />
-        <button>{submitText}</button>
+        <div className="mb-3">
+          <FormErrors errors={errors['username']} />
+          <label className="form-label" htmlFor="username">
+            Username:
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            name="username"
+            id="username"
+            value={user.username}
+            onChange={handleChange('username')}
+          />
+        </div>
+        <div className="mb-3">
+          <FormErrors errors={errors['password']} />
+          <label className="form-label" htmlFor="password">
+            Password:
+          </label>
+          <input
+            className="form-control"
+            type="password"
+            name="password"
+            id="password"
+            value={user.password}
+            onChange={handleChange('password')}
+          />
+        </div>
+        <button className="btn btn-primary">{submitText}</button>
       </form>
     </div>
   );

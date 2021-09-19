@@ -11,14 +11,24 @@ const Greeting = () => {
   const handleClick = () => dispatch(logout());
 
   return currentUser ? (
-    <div>
-      <p>Welcome, {currentUser.username}</p>
-      <button onClick={handleClick}>Logout</button>
+    <div className="navbar align-items-center my-4">
+      <h1 className="m-0">BenchBnB</h1>
+      <div>
+        <span className="me-3">Welcome, {currentUser.username}</span>
+        <a href="#" onClick={handleClick}>
+          Logout
+        </a>
+      </div>
     </div>
   ) : (
-    <div>
-      <Link to="/signup">Sign Up</Link>
-      <Link to="/login">Log In</Link>
+    <div className="navbar align-items-center my-4">
+      <h1>BenchBnB</h1>
+      <div>
+        <Link className="me-3" to="/signup">
+          Sign Up
+        </Link>
+        <Link to="/login">Log In</Link>
+      </div>
     </div>
   );
 };

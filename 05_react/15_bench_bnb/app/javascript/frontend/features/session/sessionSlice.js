@@ -5,16 +5,22 @@ const _nullSession = {
   userId: null,
 };
 
-export const signup = createAsyncThunk('session/signup', (user) =>
-  sessionAPI.signup(user)
+export const signup = createAsyncThunk(
+  'session/signup',
+  (user, { rejectWithValue }) =>
+    sessionAPI.signup(user).catch((err) => rejectWithValue(err))
 );
 
-export const login = createAsyncThunk('session/login', (user) =>
-  sessionAPI.login(user)
+export const login = createAsyncThunk(
+  'session/login',
+  (user, { rejectWithValue }) =>
+    sessionAPI.login(user).catch((err) => rejectWithValue(err))
 );
 
-export const logout = createAsyncThunk('session/logout', (user) =>
-  sessionAPI.logout(user)
+export const logout = createAsyncThunk(
+  'session/logout',
+  (user, { rejectWithValue }) =>
+    sessionAPI.logout(user).catch((err) => rejectWithValue(err))
 );
 
 const sessionSlice = createSlice({
@@ -33,3 +39,6 @@ const sessionSlice = createSlice({
 });
 
 export default sessionSlice.reducer;
+
+export const selectCurrentUser = (state) =>
+  state.users.entities[state.session.userId];

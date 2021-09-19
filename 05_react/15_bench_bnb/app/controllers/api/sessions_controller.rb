@@ -8,7 +8,7 @@ class Api::SessionsController < ApplicationController
       login(@user)
       render 'api/users/show', status: :accepted
     else
-      render json: { error: 'Invalid credentials'}, status: :not_found
+      render json: { errors: ['Invalid credentials'] }, status: :not_found
     end
   end
 

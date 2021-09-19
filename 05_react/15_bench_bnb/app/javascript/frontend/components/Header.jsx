@@ -2,9 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { selectCurrentUser, logout } from './sessionSlice';
+import { selectCurrentUser, logout } from '../features/session/sessionSlice';
 
-const Greeting = () => {
+const Header = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -22,7 +22,7 @@ const Greeting = () => {
     </div>
   ) : (
     <div className="navbar align-items-center my-4">
-      <h1>BenchBnB</h1>
+      <h1 className="m-0">BenchBnB</h1>
       <div>
         <Link className="me-3" to="/signup">
           Sign Up
@@ -33,4 +33,4 @@ const Greeting = () => {
   );
 };
 
-export default Greeting;
+export default Header;

@@ -46,11 +46,5 @@ export const logout = async () => {
     },
   });
 
-  const jsonResponse = await response.json();
-
-  if (!response.ok) {
-    return Promise.reject(jsonResponse);
-  } else {
-    return jsonResponse;
-  }
+  return response.json();
 };

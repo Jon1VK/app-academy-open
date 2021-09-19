@@ -1,9 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as APIUtil from '../frontend/util/session_api_util';
+import App from '../frontend/app';
 
-window.APIUtil = APIUtil;
-
-const Hello = (props) => <div>Hello {props.name}!</div>;
-
-ReactDOM.render(<Hello name="React" />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));

@@ -2,11 +2,7 @@ class Api::BenchesController < ApplicationController
   # GET /benches
   # GET /benches.json
   def index
-    if params.has_key?(:bounds)
-      @benches = Bench.in_bounds(params[:bounds])
-    else
-      @benches = Bench.all
-    end
+    @benches = Bench.in_bounds(params[:bounds])
   end
 
   # POST /benches
@@ -17,7 +13,7 @@ class Api::BenchesController < ApplicationController
     if @bench.save
       render :show, status: :created
     else
-      render json: full_error_messages(@bench.errors), status: :unprocessable_entity
+      render json: helpers.full_error_messages(@bench.errors), status: :unprocessable_entity
     end
   end
 

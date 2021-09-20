@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import MarkerManager from '../../util/marker_manager';
 import { updateBounds } from '../filters/filtersSlice';
 import { fetchBenches } from './benchesSlice';
 
 const BenchesMap = ({ benches }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const mapRef = useRef();
   const MarkerManagerRef = useRef();
 
@@ -18,6 +20,21 @@ const BenchesMap = ({ benches }) => {
     googleMap.addListener('idle', () => {
       dispatch(updateBounds(googleMap.getBounds().toJSON()));
       dispatch(fetchBenches());
+    });
+
+    let newMarker;
+
+    googleMap.addListener('click', (e) => {
+      if (newMarker) {
+        newMarker.setMap(null);
+      }
+      const { lat, lng } = e.latLng.toJSON();
+      history.push(`/new?lat=${lat}&lon=${lng}`);
+      newMarker = new google.maps.Marker({
+        position: { lat, lng },
+        map: googleMap,
+        label: 'B',
+      });
     });
 
     MarkerManagerRef.current = new MarkerManager(googleMap);

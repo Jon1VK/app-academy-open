@@ -12,3 +12,13 @@ export const AuthRoute = ({ path, exact, component: Component }) => {
     <Redirect to="/" />
   );
 };
+
+export const ProtectedRoute = ({ path, exact, component: Component }) => {
+  const current_user = useSelector(selectCurrentUser);
+
+  return current_user ? (
+    <Route path={path} exact={exact} component={Component} />
+  ) : (
+    <Redirect to="/login" />
+  );
+};

@@ -20,3 +20,7 @@ const benchesSlice = createSlice({
 });
 
 export default benchesSlice.reducer;
+
+export const { selectAll: selectAllBenches } = benchesAdapter.getSelectors(
+  (state) => state.benches
+);

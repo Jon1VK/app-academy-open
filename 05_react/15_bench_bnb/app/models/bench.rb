@@ -14,6 +14,13 @@
 #  index_benches_on_lat_and_lon  (lat,lon) UNIQUE
 #
 class Bench < ApplicationRecord
+  scope :in_bounds, ->(bounds) {
+    where(
+      lat: bounds[:south]..bounds[:north],
+      lon: bounds[:west]..bounds[:east]
+    )
+  }
+
   validates :description, presence: true
   validates :lat, presence: true, uniqueness: { scope: :lon }
   validates :lon, presence: true

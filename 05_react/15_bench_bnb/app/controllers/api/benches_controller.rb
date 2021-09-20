@@ -2,7 +2,11 @@ class Api::BenchesController < ApplicationController
   # GET /benches
   # GET /benches.json
   def index
-    @benches = Bench.all
+    if params.has_key?(:bounds)
+      @benches = Bench.in_bounds(params[:bounds])
+    else
+      @benches = Bench.all
+    end
   end
 
   # POST /benches

@@ -18,7 +18,7 @@ const Search = () => {
     <div>Loading!</div>
   ) : (
     <div>
-      <BenchesMap />
+      <BenchesMap benches={benches} />
       <BenchesIndex benches={benches} />
     </div>
   );

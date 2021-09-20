@@ -7,7 +7,7 @@ import Header from './components/Header';
 import LoginForm from './features/session/LoginForm';
 import SignupForm from './features/session/SignupForm';
 import { fetchBenches } from './features/benches/benchesSlice';
-import BenchesIndex from './features/benches/BenchesIndex';
+import Search from './features/benches/Search';
 
 window.store = store;
 window.fetchBenches = fetchBenches;
@@ -16,7 +16,7 @@ const App = () => (
   <Provider store={store}>
     <HashRouter>
       <Header />
-      <Route exact path="/" component={BenchesIndex} />
+      <Route exact path="/" component={Search} />
       <AuthRoute path="/login" component={LoginForm} />
       <AuthRoute path="/signup" component={SignupForm} />
     </HashRouter>

@@ -6,6 +6,10 @@ import store from './store';
 import Header from './components/Header';
 import LoginForm from './features/session/LoginForm';
 import SignupForm from './features/session/SignupForm';
+import { fetchBenches } from './features/benches/benchesSlice';
+
+window.store = store;
+window.fetchBenches = fetchBenches;
 
 const App = () => (
   <Provider store={store}>

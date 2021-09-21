@@ -2,7 +2,11 @@ class Api::BenchesController < ApplicationController
   # GET /benches
   # GET /benches.json
   def index
-    @benches = Bench.in_bounds(params[:bounds])
+    @benches = Bench.filter_by(
+      bounds: params[:bounds],
+      min_seats: params[:min_seats],
+      max_seats: params[:max_seats]
+    )
   end
 
   # POST /benches

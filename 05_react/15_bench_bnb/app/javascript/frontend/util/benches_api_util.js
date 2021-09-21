@@ -1,11 +1,13 @@
 import csrf_token from './csrf_token';
 
-export const fetchBenches = (filters) => {
-  const {
-    bounds: { north, east, south, west },
-  } = filters;
+export const fetchBenches = ({
+  bounds: { north, east, south, west },
+  minSeats,
+  maxSeats,
+}) => {
+  const seatsQuery = `min_seats=${minSeats}&max_seats=${maxSeats}`;
   const boundsQuery = `bounds[north]=${north}&bounds[east]=${east}&bounds[south]=${south}&bounds[west]=${west}`;
-  return fetch(`/api/benches?${boundsQuery}`).then((response) =>
+  return fetch(`/api/benches?${seatsQuery}&${boundsQuery}`).then((response) =>
     response.json()
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import MarkerManager from '../../util/marker_manager';
-import { updateBounds } from '../filters/filtersSlice';
+import { updateFilter } from '../filters/filtersSlice';
 import { fetchBenches } from './benchesSlice';
 
 const BenchesMap = ({ benches }) => {
@@ -18,7 +18,7 @@ const BenchesMap = ({ benches }) => {
     });
 
     googleMap.addListener('idle', () => {
-      dispatch(updateBounds(googleMap.getBounds().toJSON()));
+      dispatch(updateFilter('bounds', googleMap.getBounds().toJSON()));
       dispatch(fetchBenches());
     });
 

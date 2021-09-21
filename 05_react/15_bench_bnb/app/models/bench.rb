@@ -15,10 +15,11 @@
 #  index_benches_on_lat_and_lon  (lat,lon) UNIQUE
 #
 class Bench < ApplicationRecord
-  scope :in_bounds, ->(bounds) {
+  scope :filter_by, ->(bounds:, min_seats:, max_seats:) {
     where(
       lat: bounds[:south]..bounds[:north],
-      lon: bounds[:west]..bounds[:east]
+      lon: bounds[:west]..bounds[:east],
+      seats: min_seats..max_seats
     )
   }
 

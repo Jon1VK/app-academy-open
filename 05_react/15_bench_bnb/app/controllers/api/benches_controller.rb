@@ -8,6 +8,10 @@ class Api::BenchesController < ApplicationController
       max_seats: params[:max_seats]
     )
   end
+  
+  def show
+    @bench = Bench.find(params[:id])
+  end
 
   # POST /benches
   # POST /benches.json

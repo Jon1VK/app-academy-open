@@ -15,6 +15,10 @@ export const fetchBenches = createAsyncThunk(
   }
 );
 
+export const fetchBench = createAsyncThunk('benches/fetchBench', (id) =>
+  benchesAPI.fetchBench(id)
+);
+
 export const createBench = createAsyncThunk(
   'benches/createBench',
   (bench, { rejectWithValue }) =>
@@ -27,12 +31,12 @@ const benchesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchBenches.fulfilled, benchesAdapter.setAll)
+      .addCase(fetchBench.fulfilled, benchesAdapter.setOne)
       .addCase(createBench.fulfilled, benchesAdapter.addOne);
   },
 });
 
 export default benchesSlice.reducer;
 
-export const { selectAll: selectAllBenches } = benchesAdapter.getSelectors(
-  (state) => state.benches
-);
+export const { selectAll: selectAllBenches, selectById: selectBenchById } =
+  benchesAdapter.getSelectors((state) => state.benches);

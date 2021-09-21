@@ -12,7 +12,9 @@ const Header = () => {
 
   return currentUser ? (
     <div className="navbar align-items-center my-4">
-      <h1 className="m-0">BenchBnB</h1>
+      <h1 className="m-0">
+        <Link to="/">BenchBnB</Link>
+      </h1>
       <div>
         <span className="me-3">Welcome, {currentUser.username}</span>
         <a href="#" onClick={handleClick}>
@@ -22,7 +24,9 @@ const Header = () => {
     </div>
   ) : (
     <div className="navbar align-items-center my-4">
-      <h1 className="m-0">BenchBnB</h1>
+      <h1 className="m-0">
+        <Link to="/">BenchBnB</Link>
+      </h1>
       <div>
         <Link className="me-3" to="/signup">
           Sign Up

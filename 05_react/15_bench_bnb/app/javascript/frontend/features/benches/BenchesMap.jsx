@@ -5,7 +5,11 @@ import MarkerManager from '../../util/marker_manager';
 import { updateFilter } from '../filters/filtersSlice';
 import { fetchBenches } from './benchesSlice';
 
-const BenchesMap = ({ benches }) => {
+const BenchesMap = ({
+  benches,
+  options = { center: { lat: 37.7758, lng: -122.435 }, zoom: 13 },
+  disabled = false,
+}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const mapRef = useRef();
@@ -13,8 +17,7 @@ const BenchesMap = ({ benches }) => {
 
   useEffect(() => {
     const googleMap = new google.maps.Map(mapRef.current, {
-      center: { lat: 37.7758, lng: -122.435 },
-      zoom: 13,
+      ...options,
     });
 
     googleMap.addListener('idle', () => {
@@ -22,22 +25,15 @@ const BenchesMap = ({ benches }) => {
       dispatch(fetchBenches());
     });
 
-    let newMarker;
+    MarkerManagerRef.current = new MarkerManager(googleMap, history);
 
-    googleMap.addListener('click', (e) => {
-      if (newMarker) {
-        newMarker.setMap(null);
-      }
-      const { lat, lng } = e.latLng.toJSON();
-      history.push(`/new?lat=${lat}&lon=${lng}`);
-      newMarker = new google.maps.Marker({
-        position: { lat, lng },
-        map: googleMap,
-        label: 'B',
+    if (!disabled) {
+      googleMap.addListener('click', (e) => {
+        const { lat, lng } = e.latLng.toJSON();
+        MarkerManagerRef.current.addNewBenchMarker({ lat, lng });
+        history.push(`/new?lat=${lat}&lon=${lng}`);
       });
-    });
-
-    MarkerManagerRef.current = new MarkerManager(googleMap);
+    }
   }, []);
 
   useEffect(() => {

@@ -12,6 +12,9 @@ export const fetchBenches = ({
   );
 };
 
+export const fetchBench = (id) =>
+  fetch(`/api/benches/${id}`).then((response) => response.json());
+
 export const createBench = async (bench) => {
   const response = await fetch('/api/benches', {
     method: 'POST',

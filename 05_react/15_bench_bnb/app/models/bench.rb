@@ -23,6 +23,8 @@ class Bench < ApplicationRecord
     )
   }
 
+  has_many :reviews
+
   validates :description, presence: true
   validates :seats, presence: true, numericality: { greater_than: 0 }
   validates :lat, presence: true, uniqueness: { scope: :lon }

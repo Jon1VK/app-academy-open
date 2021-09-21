@@ -6,6 +6,7 @@
 #  description :string           not null
 #  lat         :float            not null
 #  lon         :float            not null
+#  seats       :integer          default(1), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -22,6 +23,7 @@ class Bench < ApplicationRecord
   }
 
   validates :description, presence: true
+  validates :seats, presence: true, numericality: { greater_than: 0 }
   validates :lat, presence: true, uniqueness: { scope: :lon }
   validates :lon, presence: true
 end

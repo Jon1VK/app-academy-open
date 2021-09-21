@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useLocation } from 'react-router';
 import { createBench } from './benchesSlice';
+import FormErrors from '../../util/FormErrors';
 
 const BenchForm = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  const [errors, setErrors] = useState({});
 
   const [bench, setBench] = useState({
     description: '',
@@ -27,7 +29,7 @@ const BenchForm = () => {
       .then(() => {
         history.push('/');
       })
-      .catch((errors) => console.log(errors));
+      .catch((errors) => setErrors(errors));
   };
 
   return (
@@ -35,6 +37,7 @@ const BenchForm = () => {
       <h2>Add New Bench</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
+          <FormErrors errors={errors['description']} />
           <label className="form-label" htmlFor="description">
             Description
           </label>
@@ -47,14 +50,15 @@ const BenchForm = () => {
           />
         </div>
         <div className="mb-3">
-          <label className="form-label" htmlFor="number-of-seats">
+          <FormErrors errors={errors['seats']} />
+          <label className="form-label" htmlFor="seats">
             Number of seats
           </label>
           <input
             className="form-control"
             type="number"
             min="1"
-            id="number-of-seats"
+            id="seats"
             value={bench.seats}
             onChange={handleChange('seats')}
           />

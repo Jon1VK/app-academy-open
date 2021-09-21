@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import FormErrors from './FormErrors';
+import FormErrors from '../../util/FormErrors';
 
 const _nullUser = {
   username: '',

@@ -26,4 +26,5 @@ class Review < ApplicationRecord
   belongs_to :bench
 
   validates :rating, presence: true, numericality: { greater_than: 0, less_than: 6 }
+  validates :user_id, uniqueness: { scope: :bench_id }
 end

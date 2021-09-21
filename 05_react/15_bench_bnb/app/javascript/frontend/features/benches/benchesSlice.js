@@ -31,8 +31,12 @@ const benchesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchBenches.fulfilled, benchesAdapter.setAll)
-      .addCase(fetchBench.fulfilled, benchesAdapter.setOne)
-      .addCase(createBench.fulfilled, benchesAdapter.addOne);
+      .addCase(fetchBench.fulfilled, (state, action) => {
+        benchesAdapter.setOne(state, action.payload.bench);
+      })
+      .addCase(createBench.fulfilled, (state, action) => {
+        benchesAdapter.setOne(state, action.payload.bench);
+      });
   },
 });
 

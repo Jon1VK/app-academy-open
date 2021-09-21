@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import sessionReducer, { login } from './features/session/sessionSlice';
 import usersReducer from './features/users/usersSlice';
 import benchesReducer from './features/benches/benchesSlice';
+import reviewsReducer from './features/reviews/reviewsSlice';
 import filtersReducer from './features/filters/filtersSlice';
 
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
     session: sessionReducer,
     users: usersReducer,
     benches: benchesReducer,
+    reviews: reviewsReducer,
     filters: filtersReducer,
   },
 });

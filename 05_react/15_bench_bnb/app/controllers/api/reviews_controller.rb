@@ -1,4 +1,10 @@
-class API::ReviewsController < ApplicationController
+class Api::ReviewsController < ApplicationController
+  # GET benches/1/reviews
+  # GET benches/1/reviews.json
+  def index
+    @reviews = Bench.find(params[:bench_id]).reviews.includes(:user)
+  end
+
   # POST /reviews
   # POST /reviews.json
   def create

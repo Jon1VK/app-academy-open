@@ -20,14 +20,14 @@ const BenchesMap = ({
       ...options,
     });
 
-    googleMap.addListener('idle', () => {
-      dispatch(updateFilter('bounds', googleMap.getBounds().toJSON()));
-      dispatch(fetchBenches());
-    });
-
     MarkerManagerRef.current = new MarkerManager(googleMap, history);
 
     if (!disabled) {
+      googleMap.addListener('idle', () => {
+        dispatch(updateFilter('bounds', googleMap.getBounds().toJSON()));
+        dispatch(fetchBenches());
+      });
+
       googleMap.addListener('click', (e) => {
         const { lat, lng } = e.latLng.toJSON();
         MarkerManagerRef.current.addNewBenchMarker({ lat, lng });

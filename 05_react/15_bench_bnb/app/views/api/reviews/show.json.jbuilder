@@ -1,1 +1,1 @@
-json.review @review, partial: 'api/reviews/review', as: :review
+json.partial! @review

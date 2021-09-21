@@ -1,12 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectBenchById } from './benchesSlice';
+import { fetchBench, selectBenchById } from './benchesSlice';
+import { selectAllReviews } from '../reviews/reviewsSlice';
 import BenchesMap from './BenchesMap';
+import ReviewIndex from '../reviews/ReviewIndex';
+import ReviewForm from '../reviews/ReviewForm';
 
 const BenchShow = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const bench = useSelector((state) => selectBenchById(state, id));
+  const reviews = useSelector(selectAllReviews);
+
+  useEffect(() => {
+    dispatch(fetchBench(id));
+  }, [id]);
 
   const options = {
     draggable: false,
@@ -24,7 +33,9 @@ const BenchShow = () => {
       </div>
       <div className="col-6">
         <h2>{bench.description}</h2>
-        <span>Number of seats: {bench.seats}</span>
+        <p>Number of seats: {bench.seats}</p>
+        <ReviewIndex reviews={reviews} />
+        <ReviewForm />
       </div>
     </div>
   ) : null;

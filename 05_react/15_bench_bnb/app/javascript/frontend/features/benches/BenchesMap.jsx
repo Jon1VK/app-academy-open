@@ -37,8 +37,8 @@ const BenchesMap = ({
   }, []);
 
   useEffect(() => {
-    MarkerManagerRef.current.updateMarkers(benches);
-  }, [benches]);
+    MarkerManagerRef.current.updateMarkers(benches, disabled);
+  }, [benches, disabled]);
 
   return (
     <div id="map-container" ref={mapRef}>

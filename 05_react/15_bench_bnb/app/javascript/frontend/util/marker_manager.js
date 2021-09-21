@@ -9,7 +9,7 @@ export default class MarkerManager {
     });
   }
 
-  updateMarkers(benches) {
+  updateMarkers(benches, disabled) {
     this.newBenchMarker.setMap(null);
 
     const benchesLookupTable = benches.reduce((table, bench) => {
@@ -26,23 +26,25 @@ export default class MarkerManager {
 
     benches.forEach((bench) => {
       if (!this.markers[bench.id]) {
-        this.addMarker(bench);
+        this.addMarker(bench, disabled);
       }
     });
   }
 
-  addMarker(bench) {
+  addMarker(bench, disabled) {
     const marker = new google.maps.Marker({
       position: { lat: bench.lat, lng: bench.lon },
       map: this.map,
       title: bench.description,
     });
 
-    marker.addListener('click', () => {
-      this.history.push(`/benches/${bench.id}`);
-    });
-
     this.markers[bench.id] = marker;
+
+    if (!disabled) {
+      marker.addListener('click', () => {
+        this.history.push(`/benches/${bench.id}`);
+      });
+    }
   }
 
   addNewBenchMarker(position) {

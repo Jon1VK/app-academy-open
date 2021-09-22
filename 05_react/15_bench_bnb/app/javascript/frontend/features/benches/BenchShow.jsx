@@ -33,6 +33,11 @@ const BenchShow = () => {
       </div>
       <div className="col-6">
         <h2>{bench.description}</h2>
+        <img
+          className="img-thumbnail"
+          src={bench.image_url}
+          alt="Image of a bench"
+        />
         <p>Number of seats: {bench.seats}</p>
         <ReviewIndex reviews={reviews} />
         <ReviewForm />

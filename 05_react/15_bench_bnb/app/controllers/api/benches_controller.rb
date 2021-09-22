@@ -28,6 +28,6 @@ class Api::BenchesController < ApplicationController
   private
     # Only allow a list of trusted parameters through.
     def bench_params
-      params.require(:bench).permit(:description, :seats, :lat, :lon)
+      params.require(:bench).permit(:description, :image, :seats, :lat, :lon)
     end
 end

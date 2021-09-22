@@ -16,13 +16,20 @@ export const fetchBench = (id) =>
   fetch(`/api/benches/${id}`).then((response) => response.json());
 
 export const createBench = async (bench) => {
+  const formData = new FormData();
+
+  Object.entries(bench).forEach(([key, value]) => {
+    if (value) {
+      formData.append(`bench[${key}]`, value);
+    }
+  });
+
   const response = await fetch('/api/benches', {
     method: 'POST',
     headers: {
       'X-CSRF-Token': csrf_token,
-      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ bench }),
+    body: formData,
   });
 
   const jsonResponse = await response.json();

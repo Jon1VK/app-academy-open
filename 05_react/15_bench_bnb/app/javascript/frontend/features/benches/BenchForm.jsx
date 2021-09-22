@@ -13,6 +13,7 @@ const BenchForm = () => {
 
   const [bench, setBench] = useState({
     description: '',
+    image: null,
     seats: '1',
     lat: parseFloat(new URLSearchParams(location.search).get('lat')),
     lon: parseFloat(new URLSearchParams(location.search).get('lon')),
@@ -20,6 +21,10 @@ const BenchForm = () => {
 
   const handleChange = (type) => (e) => {
     setBench({ ...bench, [type]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    setBench({ ...bench, image: e.target.files[0] });
   };
 
   const handleSubmit = (e) => {
@@ -74,6 +79,17 @@ const BenchForm = () => {
               id="seats"
               value={bench.seats}
               onChange={handleChange('seats')}
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label" htmlFor="image">
+              Image
+            </label>
+            <input
+              className="form-control"
+              type="file"
+              id="image"
+              onChange={handleImageChange}
             />
           </div>
           <button className="btn btn-primary">Add Bench</button>

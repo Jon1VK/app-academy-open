@@ -23,6 +23,7 @@ class Bench < ApplicationRecord
     )
   }
 
+  has_one_attached :image
   has_many :reviews
 
   validates :description, presence: true

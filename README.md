@@ -11,8 +11,8 @@ In this repository there are my projects and solutions for [App Academy Open - F
 | SQL                              |    Done     |               [Link](/02_sql)               |
 | Rails                            |    Done     |              [Link](/03_rails)              |
 | JavaScript                       |    Done     |           [Link](/04_javascript)            |
-| React                            | In Progress |              [Link](/05_react)              |
-| Full Stack Project               |             |                      -                      |
+| React                            |    Done     |              [Link](/05_react)              |
+| Full Stack Project               | In Progress |                      -                      |
 | MERN Stack Curriculum            |             |                      -                      |
 | Full Stack Online - Job Search   |             |                      -                      |
 | Docker Curriculum                |             |                      -                      |

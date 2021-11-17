@@ -4,19 +4,30 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const keys = require('../../config/keys');
 const User = require('../../models/User');
+const validateRegisterInput = require('../../validations/register');
+const validateLoginInput = require('../../validations/login');
 
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  if (await User.findOne({ email: req.body.email })) {
+  const { isValid, errors } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const { handle, email, password } = req.body;
+
+  if (await User.findOne({ email })) {
     return res.status(403).json({
       email: 'A user has already been registered with this email address',
     });
   }
 
   const user = new User({
-    ...req.body,
-    password: await bcrypt.hash(req.body.password, 10),
+    handle,
+    email,
+    password: await bcrypt.hash(password, 10),
   });
 
   await user.save();
@@ -24,7 +35,15 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+  const { isValid, errors } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
 
   if (!user) {
     return res.status(404).json({
@@ -32,7 +51,7 @@ router.post('/login', async (req, res) => {
     });
   }
 
-  if (!(await bcrypt.compare(req.body.password, user.password))) {
+  if (!(await bcrypt.compare(password, user.password))) {
     return res.status(400).json({ password: 'Incorrect password' });
   }
 

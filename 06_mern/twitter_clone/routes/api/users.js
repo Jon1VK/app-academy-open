@@ -76,7 +76,7 @@ function generateToken(user) {
     handle: user.handle,
   };
 
-  return jwt.sign(payload, keys.secret, { expiresIn: 3600 });
+  return 'Bearer ' + jwt.sign(payload, keys.secret, { expiresIn: 3600 });
 }
 
 module.exports = router;
